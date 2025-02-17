@@ -1,0 +1,24 @@
+<body>
+    <div class="topbar">
+       <div class="search">
+            <div (click)="isBoolean = !isBoolean" [ngClass]="{'active': isBoolean}" class="search-box">
+                <i class='bx bx-search'></i>
+                <p>Search</p>
+                <i class='bx bx-left-arrow-alt'></i>
+            </div>
+            <div [ngClass]="{'active': isBoolean}" class="search-line">
+             
+            </div>
+       </div>
+       <div class="member">
+            <i class='bx bx-log-in'></i>
+            <p>Member</p>
+       </div>
+
+    </div>
+    
+    
+    
+    <app-main />
+
+</body>
