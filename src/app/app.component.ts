@@ -12,4 +12,5 @@ import { MainComponent } from './main/main.component';
 })
 export class AppComponent {
   title = 'survey';
+
 }

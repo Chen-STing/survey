@@ -7,17 +7,31 @@ import { Component } from '@angular/core';
   templateUrl: './main.component.html',
   styleUrl: './main.component.scss'
 })
+
 export class MainComponent {
 
-  styleSheets = document.styleSheets[0];
-  showShadow() {
-    this.styleSheets.insertRule(`
-      .survey-card-container:hover .survey-card{
-      filter: blur(5px);
-      transform: scale(0.7);
-    }`, 0);
-  }
-  closeShadow() {
-    this.styleSheets.deleteRule(0)
-  }
+
+
+newStyle: HTMLStyleElement = document.createElement('style');
+
+
+
+showShadow() {
+  this.newStyle.innerHTML = '.survey-card-container:hover .survey-card {filter: blur(5px); transform: scale(0.7);}';
+  document.head.appendChild(this.newStyle);
+};
+
+
+
+closeShadow() {
+  document.head.removeChild(this.newStyle);
+}
+
+ngOnInit(): void {
+  //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+  //Add 'implements OnInit' to the class.
+  console.log(this.newStyle);
+
+}
+
 }
