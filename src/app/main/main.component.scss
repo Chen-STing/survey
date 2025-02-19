@@ -8,10 +8,11 @@
     padding-right: 3vw;
 }
 .survey-card-container {
-    height: 65vh;
     position: relative;
 }
+
 .survey-card {
+    text-align: left;
     padding: 20px;
     width: 200px;
     height: 200px;
@@ -56,4 +57,18 @@
     bottom: 22%;
     left: 66%;
     transform: rotate(26deg)
+}
+
+.pagination {
+    position: absolute;
+    bottom: -40vh;
+    left: 40%;
+}
+
+.pagination-next,.pagination-previous{
+    border: none;
+}
+
+nav i {
+    font-size: 25px;
 }

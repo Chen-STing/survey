@@ -21,8 +21,10 @@
     "@angular/platform-browser-dynamic": "^19.1.0",
     "@angular/router": "^19.1.0",
     "boxicons": "^2.1.4",
+    "bulma": "^1.0.3",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
+    "uikit": "^3.23.1",
     "zone.js": "~0.15.0"
   },
   "devDependencies": {

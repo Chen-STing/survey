@@ -1,0 +1,23 @@
+.hero {
+    height: 10%;
+    background: linear-gradient(95deg,rgba(67, 173, 219, 0.75),rgba(44, 159, 208, 0.6),rgba(29, 92, 193, 0.45));
+}
+
+.title {
+    width: 16%;
+    color: #807476;
+    cursor: pointer;
+}
+
+#tab1:hover,
+#tab2:hover,
+#tab3:hover {
+    color: rgb(125, 123, 123);
+    background: rgba(1, 1, 22, 0.5);
+}
+
+.side-box {
+    background: rgba(92, 153, 252, 0.35);
+    height: 90%;
+    width: 180px;
+}

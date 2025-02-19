@@ -1,24 +1,67 @@
 <body>
-    <div class="topbar">
-       <div class="search">
-            <div (click)="isBoolean = !isBoolean" [ngClass]="{'active': isBoolean}" class="search-box">
-                <i class='bx bx-search'></i>
-                <p>Search</p>
-                <i class='bx bx-left-arrow-alt'></i>
+    <section class="hero is-info is-large">
+        <!-- 頭部導航欄 -->
+        <div class="hero-head">
+            <nav class="navbar">
+                <div class="container">
+                    <div class="navbar-brand">
+                        <div class="navbar-item search">
+                            <div (click)="isBoolean = !isBoolean" [ngClass]="{'active': isBoolean}" class="search-box button is-info is-inverted">
+                                <i class='bx bx-search'></i>
+                                <p>Search</p>
+                            </div>
+                        </div>
+                    </div>
+              <div id="navbarMenuHeroB" class="navbar-menu">
+                <div class="navbar-end">
+                    <span class="navbar-item">
+                        <p class="button is-info is-inverted" routerLink="/login">
+                        <span class="icon">
+                            <i class='bx bx-log-in'></i>
+                        </span>
+                        <span>會員登入</span>
+                      </p>
+                   </span>
+                </div>
+              </div>
             </div>
-            <div [ngClass]="{'active': isBoolean}" class="search-line">
-             
-            </div>
-       </div>
-       <div class="member">
-            <i class='bx bx-log-in'></i>
-            <p>Member</p>
-       </div>
+          </nav>
+        </div>
+    
+    <!-- 中央文字 -->
+        <div class="hero-body">
+          <div class="container has-text-centered">
+            <app-main />
+            <p class="title">Survey</p>
+            <p class="subtitle">Subtitle</p>
+          </div>
+        </div>
+    </section>
 
-    </div>
-    
-    
-    
-    <app-main />
+    <!-- 彈出搜尋視窗 -->
+    @if(isBoolean) {
+        <div class="card">
+            <div class="card-content">
+                <div class="field">
+                    <p class="control is-expanded has-icons-left">
+                      <input class="input" type="text" placeholder="Search ...">
+                      <span class="icon is-small is-left">
+                        <i class='bx bx-search'></i>
+                      </span>
+                    </p>
+                  </div>
+                <p class="subtitle">Jeff Atwood</p>
+            </div>
+            <footer class="card-footer">
+              <p class="card-footer-item">
+                <input type="date">
+              </p>
+              <p class="card-footer-item">
+                <input type="date">
+              </p>
+            </footer>
+        </div>
+    }
+
 
 </body>

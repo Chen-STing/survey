@@ -33,9 +33,16 @@
             ],
             "styles": [
               "node_modules/boxicons/css/boxicons.min.css",
-              "src/styles.scss"
+              "src/styles.scss",
+              "node_modules/bulma/css/bulma.css",
+              "node_modules/uikit/dist/css/uikit.min.css",
+              "node_modules/uikit/dist/css/uikit-core.min.css"
+
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/uikit/dist/js/uikit.min.js",
+              "node_modules/uikit/dist/js/uikit-icons.min.js"
+            ]
           },
           "configurations": {
             "production": {

@@ -1,4 +1,11 @@
 <body>
+    <section class="hero is-small is-primary">
+        <div class="hero-body">
+          <p class="title" routerLink="">Survey</p>
+        </div>
+    </section>
+
+
     <div class="container" [ngClass]="{'active': isBoolean}">
         <div class="form-box login">
             <form action="">
@@ -14,7 +21,7 @@
                 <div class="forget-link">
                     <a href="#">忘記密碼?</a>
                 </div>
-                <button type="submit" class="btn">登入</button>
+                <button type="submit" class="btn" routerLink="/management">登入</button>
                 <div class="social-icons">
                     <a href="#"><i class='bx bxl-facebook-circle'></i></a>
                     <a href="#"><i class='bx bxl-google'></i></a>
