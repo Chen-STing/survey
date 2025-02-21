@@ -1,5 +1,6 @@
 <body>
     <section class="hero is-info is-large">
+
         <!-- 頭部導航欄 -->
         <div class="hero-head">
             <nav class="navbar">
@@ -20,21 +21,32 @@
                             <i class='bx bx-log-in'></i>
                         </span>
                         <span>會員登入</span>
-                      </p>
+                        </p>
                    </span>
                 </div>
               </div>
             </div>
           </nav>
         </div>
-    
-    <!-- 中央文字 -->
+
         <div class="hero-body">
           <div class="container has-text-centered">
-            <app-main />
-            <p class="title">Survey</p>
-            <p class="subtitle">Subtitle</p>
-          </div>
+            <!-- 問卷所在 -->
+            <div class="survey-card-container">
+              @for (question of questionData; track $index) {
+                <div class="survey-card" (mouseenter)="showShadow()" (mouseleave)="closeShadow()">
+                  <p>id: {{question.id}}</p>
+                  <div class="question-title-box">
+                    <h2>{{question.title}}</h2>
+                  </div>
+                  <p style="font-size: 14px;">截止日期： {{question.endTime}}</p>
+                </div>
+              }
+            </div>
+            <!-- 中央文字 -->
+                <p class="title">Survey</p>
+                <p class="subtitle">Subtitle</p>
+              </div>
         </div>
     </section>
 
@@ -44,13 +56,13 @@
             <div class="card-content">
                 <div class="field">
                     <p class="control is-expanded has-icons-left">
-                      <input class="input" type="text" placeholder="Search ...">
+                      <input class="input" type="text" placeholder="Search ..." >
                       <span class="icon is-small is-left">
                         <i class='bx bx-search'></i>
                       </span>
                     </p>
                   </div>
-                <p class="subtitle">Jeff Atwood</p>
+                <p class="subtitle">搜尋紀錄</p>
             </div>
             <footer class="card-footer">
               <p class="card-footer-item">
@@ -62,6 +74,31 @@
             </footer>
         </div>
     }
+
+   <!-- 下列導航碼 -->
+  <nav class="pagination is-rounded" role="navigation" aria-label="pagination">
+    <ul class="pagination-list">
+      <li><a href="#" class="pagination-previous">
+        <i class='bx bxs-chevron-left-circle'></i></a>
+      </li>
+      <li><a href="#" class="pagination-link" aria-label="Goto page 1">1</a></li>
+      <li><span class="pagination-ellipsis">&hellip;</span></li>
+      <li><a href="#" class="pagination-link" aria-label="Goto page 45">45</a></li>
+      <li>
+        <a
+        class="pagination-link is-current"
+        aria-label="Page 46"
+        aria-current="page"
+        >46</a>
+      </li>
+      <li><a href="#" class="pagination-link" aria-label="Goto page 47">47</a></li>
+      <li><span class="pagination-ellipsis">&hellip;</span></li>
+      <li><a href="#" class="pagination-link" aria-label="Goto page 86">86</a></li>
+      <li><a href="#" class="pagination-next">
+          <i class='bx bxs-chevron-right-circle'></i></a>
+      </li>
+    </ul>
+  </nav>
 
 
 </body>

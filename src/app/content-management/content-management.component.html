@@ -1,18 +1,53 @@
-    <section class="hero is-small is-primary">
-        <div class="hero-body">
-          <p class="title" routerLink="">Survey</p>
-        </div>
-    </section>
+<!-- 頭部導航欄 -->
+<section class="hero is-small is-primary">
+    <div class="hero-body">
+      <p class="title" routerLink="">Survey</p>
+      <div class="buttons">
+      <a class="button is-link">
+        <i class='bx bx-log-out'></i>
+        <span>登出</span>
+      </a>
+      </div>
+    </div>
+</section>
 
-<div class="side-box">
-    <div class="uk-child-width-1-2@s" uk-grid>
-        <div>
-            <ul class="uk-tab-right tab-box" uk-tab>
-                <li class="uk-active" id="tab1"><a href="#">我的問卷</a></li>
-                <li id="tab2"><a href="#">Item</a></li>
-                <li id="tab3"><a href="#">Item</a></li>
-            </ul>
-            <button>登出</button>
-        </div>
+
+<div class="body-box">
+
+  <!-- 側邊導航欖 -->
+  <nav class="side-nav">
+    <div class="item" routerLinkActive="active" >
+      <button routerLink="/management/edit">
+        <i class='bx bxs-edit' ></i>
+        我的問卷</button>
+    </div>
+    <div class="item" routerLinkActive="active" >
+      <button routerLink="/management/feedback">
+        <i class='bx bx-message-dots' ></i>
+        問卷回饋</button>
+    </div>
+    <div class="item" routerLinkActive="active" >
+      <button routerLink="/management/count">
+        <i class='bx bx-line-chart' ></i>
+        問卷統計</button>
+    </div>
+    <div class="item" routerLinkActive="active" >
+      <button routerLink="/management/member">
+        <i class='bx bx-user-plus'></i>
+        會員管理</button>
+    </div>
+  </nav>
+
+  <!-- 右邊畫面 -->
+    <div class="directions">
+
+        <router-outlet></router-outlet>
+
+
+
     </div>
 </div>
+
+
+
+

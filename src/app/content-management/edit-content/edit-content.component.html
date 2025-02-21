@@ -1,1 +1,137 @@
-<p>edit-content works!</p>
+
+<div class="container">
+  <!-- 創建、刪除按鈕 -->
+  <div class="create-delete">
+    <button class="button is-info is-focused" (click)="isTrue = !isTrue">
+      <i class='bx bx-plus-medical'></i>
+    </button>
+    <button class="button is-info is-focused">
+      <i class='bx bxs-trash-alt' ></i>
+    </button>
+  </div>
+
+  <!-- 表格本體 -->
+  <table class="table is-striped is-fullwidth">
+    <thead class="table-head">
+      <tr>
+        <th><input type="checkbox"></th>
+        <th>Id</th>
+        <th>問卷名稱</th>
+        <th>創建時間</th>
+        <th>填寫期限</th>
+        <th>狀態</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      @for(data of questionData; track $index) {
+
+        <tr class="table-row">
+
+          <td><input type="checkbox"></td>
+          <th>{{data.id}}</th>
+          <td>{{data.title}}</td>
+          <td>-</td>
+          <td>{{data.endTime}}</td>
+          <td>-</td>
+          <td>-</td>
+
+        </tr>
+
+      }
+    </tbody>
+
+
+
+  </table>
+
+  <!-- 切換頁面功能 -->
+  <!-- <mat-paginator #paginator
+               [length]="totalCount"
+               [pageIndex]="0"
+               [pageSize]="10"
+               [pageSizeOptions]="[5, 10, 15]"
+               (page)="pageChange($event)">
+  </mat-paginator> -->
+
+  <!-- 彈出創建盒子 -->
+  @if(isTrue) {
+    <div class="create-box">
+      <article class="message is-link">
+        <div class="message-header">
+          <p>創建新的問卷</p>
+          <button class="delete" aria-label="delete" (click)="isTrue = !isTrue"></button>
+        </div>
+      </article>
+
+      <mat-vertical-stepper [linear]="false" #stepper>
+        <mat-step [stepControl]="firstFormGroup">
+          <form [formGroup]="firstFormGroup">
+            <ng-template matStepLabel>問卷名稱</ng-template>
+
+            <div class="field">
+              <p class="control has-icons-left has-icons-right">
+                <input class="input" type="text" placeholder="Survey" />
+                <span class="icon is-small is-left">
+                  <i class='bx bxs-edit' ></i>
+                </span>
+                <span class="icon is-small is-right">
+                  <i class='bx bx-check'></i>
+                </span>
+              </p>
+            </div>
+
+            <div>
+              <button mat-button matStepperNext>Next</button>
+            </div>
+          </form>
+        </mat-step>
+        <mat-step [stepControl]="secondFormGroup">
+          <form [formGroup]="secondFormGroup">
+            <ng-template matStepLabel>開始 - 截止</ng-template>
+
+            <div class="field">
+              <p class="control has-icons-left has-icons-right">
+                <input class="input" type="date" placeholder="starttime" />
+                <span class="icon is-small is-left">
+                  <i class='bx bxs-hourglass-top'></i>
+                </span>
+                <span class="icon is-small is-right">
+                  <i class='bx bx-check'></i>
+                </span>
+              </p>
+            </div>
+            <div class="field">
+              <p class="control has-icons-left has-icons-right">
+                <input class="input" type="date" placeholder="endtime" />
+                <span class="icon is-small is-left">
+                  <i class='bx bxs-hourglass-bottom' ></i>
+                </span>
+                <span class="icon is-small is-right">
+                  <i class='bx bx-check'></i>
+                </span>
+              </p>
+            </div>
+
+            <div>
+              <button mat-button matStepperPrevious>Back</button>
+              <button mat-button matStepperNext>Next</button>
+            </div>
+          </form>
+        </mat-step>
+        <mat-step>
+          <ng-template matStepLabel>Done</ng-template>
+          You are now done.
+          <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button routerLink="/adding">Next</button>
+          </div>
+        </mat-step>
+      </mat-vertical-stepper>
+
+    </div>
+  }
+
+</div>
+
