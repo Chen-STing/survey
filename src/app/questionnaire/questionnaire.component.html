@@ -1,37 +1,127 @@
-<div class="container">
+
+
+@if (!isTrue) {
   <!-- 問卷資訊 -->
-  <div class="questionnaire-info">
-    <h5>問卷時間： 2025-02-28 ~ 2025-03-15</h5>
-    <h1>Title</h1>
-    <div>
-      <p>問卷說明</p>
+  <div class="card">
+    <div class="card-content">
+
+        <article class="message is-info">
+          <div class="message-header">
+            <h1 class="mg-title">如果你能變成動物，你想變成什麼動物?</h1>
+            <h5>問卷時間： 2025-02-28 ~ 2025-03-15</h5>
+          </div>
+          <div class="message-body">
+            <p>如果你有機會轉變成動物的形態，你會選擇成為哪一種動物，為什麼？你是否會選擇成為一種能在陸地上奔跑的陸生動物，以感受自由與速度的刺激，或者你更傾向於成為一種飛禽，能夠自由翱翔於天際？你的選擇是否受到對大自然的喜愛或對特定動物的崇敬所影響？又或者你會選擇成為一種水生生物，沉浸在深藍色的海洋中，享受寧靜和神秘的海底生活？你想透過變成某種特定的動物來體驗不同的感官和生活方式嗎？請分享你對這個想像情境的看法和理由。</p>
+          </div>
+        </article>
+
+      <!-- 受訪者資訊 -->
+        <div class="subtitle userInfo">
+          <div class="user-item">
+            <label for="">姓名：</label>
+            <input class="input is-info" type="text" placeholder="Info input"/>
+          </div>
+          <div class="user-item">
+            <label for="">年齡：</label>
+            <input class="input is-info" type="text" placeholder="Info input"/>
+          </div>
+          <div class="user-item">
+            <label for="">性別：</label>
+            <input type="radio" name="gender">男
+            <input type="radio" name="gender">女
+          </div>
+        </div>
+
     </div>
+
+
+    <!-- 取消、確認按鍵 -->
+      <footer class="card-footer">
+        <p class="card-footer-item">
+
+            <button>取消</button>
+
+        </p>
+        <p class="card-footer-item">
+
+            <button (click)="toggle()">確認</button>
+
+        </p>
+      </footer>
   </div>
-  <!-- 填寫者資料 -->
-  <div class="userInfo">
-    <span style="color: red;">*</span>
-    <label>名稱：</label>
-    <input style="width: 50%;" placeholder="請輸入名稱">
-    <br>
-    <span style="color: red;">*</span>
-    <label>信箱：</label>
-    <input style="width: 50%;" placeholder="請輸入名稱">
-    <br>
-    <span style="color: red;">*</span>
-    <label>年齡：</label>
-    <input style="width: 50%;" placeholder="請輸入名稱">
-  </div>
-  <!-- 以下問卷內容 -->
-  <ol>
-    <h3>喜歡吃的東西?</h3>
-    <li>
-    </li>
-  </ol>
-  <!-- 發佈確認 -->
-  <div>
-    <button>取消</button>
-    <button>確定</button>
-  </div>
+}
+
+
+
+  @if(isTrue) {
+    <mat-stepper>
+      <!-- 只有 1 題 -->
+      @if(arrayData.length == 1) {
+        @for (data of arrayData; track $index) {
+          <mat-step label=".Question">
+            <div class="question-box">
+              <h1>{{data.title}}</h1>
+              <button mat-button matStepperNext>Finish</button>
+            </div>
+          </mat-step>
+        }
+      }
+
+
+      <!-- 只有 2 題 -->
+      @if(arrayData.length == 2) {
+        @for (data of arrayData; track $index) {
+          @if ($index < 1) {
+            <mat-step label=".Question">
+              <div class="question-box">
+              <h1>{{data.title}}</h1>
+                <button mat-button matStepperNext>Next</button>
+              </div>
+            </mat-step>
+          }
+          @if ($index == 1) {
+            <mat-step label=".Question">
+              <div class="question-box">
+                <h1>{{data.title}}</h1>
+                <button mat-button matStepperNext>Finish</button>
+              </div>
+            </mat-step>
+          }
+        }
+      }
+
+      <!-- 超過 3 題 -->
+      @if(arrayData.length >= 3) {
+        @for (data of arrayData; track $index) {
+            @if ($index < 2) {
+              <mat-step label=".Question">
+                <div class="question-box">
+                  <h1>{{data.title}}</h1>
+                  <button mat-button matStepperNext mat-flat-button>Next</button>
+                </div>
+              </mat-step>
+            }
+            @if ($index == 2 && arrayData.length > 3) {
+              <mat-step label=".Question">
+                <div class="question-box">
+                  <h1>{{data.title}}</h1>
+                  <button mat-button matStepperNext (click)="next()">Next</button>
+                </div>
+              </mat-step>
+            }
+            @if ($index == 2 && arrayData.length == 3) {
+            <mat-step label=".Question">
+              <div class="question-box">
+                <h1>{{data.title}}</h1>
+                <button mat-button matStepperNext>Finish</button>
+              </div>
+            </mat-step>
+            }
+        }
+      }
+    </mat-stepper>
+
+  }
 
 
 
@@ -41,5 +131,3 @@
 
 
 
-
-</div>

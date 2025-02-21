@@ -1,23 +1,62 @@
 .hero {
-    height: 10%;
+    height: 5.5rem;
     background: linear-gradient(95deg,rgba(67, 173, 219, 0.75),rgba(44, 159, 208, 0.6),rgba(29, 92, 193, 0.45));
 }
 
 .title {
-    width: 16%;
+    width: 7rem;
     color: #807476;
     cursor: pointer;
 }
 
-#tab1:hover,
-#tab2:hover,
-#tab3:hover {
-    color: rgb(125, 123, 123);
-    background: rgba(1, 1, 22, 0.5);
+// 頭部導航欄
+.hero-body {
+  display: flex;
+  justify-content: space-between;
 }
 
-.side-box {
-    background: rgba(92, 153, 252, 0.35);
-    height: 90%;
-    width: 180px;
+.hero-body .buttons {
+  display: flex;
+  align-content: flex-start;
 }
+
+.buttons span {
+  margin-left: 5px;
+}
+
+// 側邊導航欄
+.side-nav {
+  width: 13.5rem;
+  overflow: hidden;
+  height: 95vh;
+  background: rgb(20, 230, 146);
+}
+
+.side-nav .item{
+  width: 13rem;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 1.5rem;
+}
+
+.side-nav .item button{
+  line-height: 4rem;
+  font-size: 1.5rem;
+  margin-left: 2rem;
+}
+
+.active {
+  background: rgba(59, 59, 169, 0.70);
+}
+// 整體布局
+.body-box {
+  display: flex;
+}
+
+.directions {
+  background: rgba(213, 210, 210, 0.65);
+  width: 100vw;
+  padding-top: 5rem;
+}
+
+

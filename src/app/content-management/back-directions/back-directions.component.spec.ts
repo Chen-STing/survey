@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddQuestComponent } from './add-quest.component';
+import { BackDirectionsComponent } from './back-directions.component';
 
-describe('AddQuestComponent', () => {
-  let component: AddQuestComponent;
-  let fixture: ComponentFixture<AddQuestComponent>;
+describe('BackDirectionsComponent', () => {
+  let component: BackDirectionsComponent;
+  let fixture: ComponentFixture<BackDirectionsComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AddQuestComponent]
+      imports: [BackDirectionsComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(AddQuestComponent);
+    fixture = TestBed.createComponent(BackDirectionsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

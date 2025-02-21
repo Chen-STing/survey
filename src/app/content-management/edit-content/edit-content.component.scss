@@ -1,0 +1,65 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+// 布局大小
+
+.container {
+  position: relative;
+  margin-left: 8rem;
+  width: 80vw;
+}
+
+.table {
+  width: 77vw;
+}
+
+// 創建&&刪除
+.create-delete i {
+  font-size: 25px;
+}
+
+.create-delete button {
+  margin: 5px;
+  background: rgba(63, 63, 218, 0.755);
+}
+
+// 表單設計
+.table-head {
+  background: rgba(26, 26, 235, 0.7);
+}
+
+.table-head th {
+  font-size: 1.8rem;
+
+}
+
+tbody {
+  font-size: 1.3rem;
+}
+
+// 模板內容
+.mat-stepper-vertical {
+  margin-top: 8px;
+}
+
+.mat-mdc-form-field {
+  margin-top: 16px;
+}
+
+// 創建視窗
+.create-box {
+  position: absolute;
+  top: 0;
+  right: 40rem;
+  background: rgb(243, 236, 236);
+  width: 30%;
+  border-radius: 20px;
+}
+
+
+.message {
+  font-size: 1.2rem;
+  color: rgb(122, 179, 160);
+}
