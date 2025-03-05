@@ -57,7 +57,7 @@
 
   <!-- 彈出創建盒子 -->
   @if(isTrue) {
-    <div class="create-box">
+    <div class="create-box" draggable="true" cdkDrag cdkDragBoundary="body">
       <article class="message is-link">
         <div class="message-header">
           <p>創建新的問卷</p>
@@ -87,9 +87,30 @@
             </div>
           </form>
         </mat-step>
+
         <mat-step [stepControl]="secondFormGroup">
           <form [formGroup]="secondFormGroup">
-            <ng-template matStepLabel>開始 - 截止</ng-template>
+            <ng-template matStepLabel>問卷說明</ng-template>
+
+            <div class="field">
+              <p class="control has-icons-left has-icons-right">
+                <textarea class="textarea" placeholder="問卷說明"></textarea>
+              </p>
+            </div>
+
+            <div>
+              <button mat-button matStepperPrevious>Back</button>
+              <button mat-button matStepperNext>Next</button>
+            </div>
+          </form>
+        </mat-step>
+
+
+
+
+        <mat-step [stepControl]="secondFormGroup">
+          <form [formGroup]="secondFormGroup">
+            <ng-template matStepLabel>開始日期 - 截止日期</ng-template>
 
             <div class="field">
               <p class="control has-icons-left has-icons-right">

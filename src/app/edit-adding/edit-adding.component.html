@@ -1,1 +1,129 @@
-<p>edit-adding works!</p>
+<body>
+
+<!-- 頁頭 -->
+<section class="hero is-small is-primary">
+  <div class="hero-body">
+    <p class="title" routerLink="">Survey</p>
+  </div>
+</section>
+
+<div class="container">
+  <div class="functionZone">
+     <!-- 選擇題型 -->
+    <div class="add-quest">
+      <p class="add-quest-option" (click)="selectQuestStat(1)">
+        <i class='bx bx-radio-circle-marked'></i>
+        <span>單選題</span>
+      </p>
+      <p class="add-quest-option" (click)="selectQuestStat(2)">
+        <i class='bx bx-check-square'></i>
+        <span>多選題</span>
+      </p>
+      <p class="add-quest-option" (click)="selectQuestStat(3)">
+        <i class='bx bx-notepad'></i>
+        <span>文字題</span>
+      </p>
+      <p class="add-quest-option" (click)="selectQuestStat(4)">
+        <i class='bx bx-star' ></i>
+        <span>評量題</span>
+      </p>
+    </div>
+
+    <div class="outline">
+      大綱
+    </div>
+  </div>
+
+
+<!-- 問卷主體 -->
+  <div class="quest-main">
+    <h1>問卷標題</h1>
+    <p>問卷說明</p>
+
+
+    <!-- 單選題 -->
+    @if (questStat == "R") {
+      <div class="quest-box">
+        <div class="radio-quest">
+          <span>No. </span><input type="text" placeholder="問題標題"><br>
+          <i class='bx bx-radio-circle'></i><input type="text" placeholder="問題選項"><i class='bx bx-no-entry'></i>
+          <div class="selectZone">
+            <i class='bx bx-plus' ></i>
+            <i class='bx bxs-trash-alt' ></i>
+          </div>
+        </div>
+      </div>
+    }
+
+    <!-- 多選題 -->
+    @if (questStat == "C") {
+      <div class="quest-box">
+        <div class="checkbox-quest">
+          <span>No. </span><input type="text" placeholder="問題標題"><br>
+          <i class='bx bx-checkbox'></i><input type="text" placeholder="問題選項"><i class='bx bx-no-entry'></i><br>
+          <i class='bx bx-checkbox'></i><input type="text" placeholder="問題選項"><i class='bx bx-no-entry'></i><br>
+          <div class="selectZone">
+            <i class='bx bx-plus' ></i>
+            <i class='bx bxs-trash-alt' ></i>
+          </div>
+        </div>
+      </div>
+    }
+
+    <!-- 文本題 -->
+    @if (questStat == "T") {
+      <div class="quest-box">
+        <div class="text-quest">
+          <span>No. </span><input type="text" placeholder="問題標題"><br>
+          <textarea
+          class="textarea is-primary"
+          placeholder="請輸入內容"
+          ></textarea>
+          <div class="selectZone">
+            <i class='bx bx-plus' ></i>
+            <i class='bx bxs-trash-alt' ></i>
+          </div>
+        </div>
+      </div>
+    }
+
+    <!-- 評量題 -->
+    @if (questStat == "A") {
+      <div class="quest-box">
+        <div class="Assessment-quest">
+          <span>No. </span><input type="text" placeholder="問題標題"><br>
+          <div>
+            <i class='bx bx-star' ></i>
+            <i class='bx bx-star' ></i>
+            <i class='bx bx-star' ></i>
+            <i class='bx bx-star' ></i>
+            <i class='bx bx-star' ></i>
+          </div>
+          <div class="selectZone">
+            <i class='bx bx-plus' ></i>
+            <i class='bx bxs-trash-alt' ></i>
+          </div>
+        </div>
+      </div>
+    }
+
+
+  </div>
+
+
+
+</div>
+
+
+<div class="save-push">
+  <button  class="button is-info is-rounded">
+    <i class='bx bxs-save' ></i>
+    <span>儲存</span>
+  </button>
+  <button  class="button is-info is-rounded">
+    <i class='bx bx-navigation'></i>
+    <span>發布</span>
+  </button>
+</div>
+
+</body>

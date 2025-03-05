@@ -7,6 +7,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatStepperModule} from '@angular/material/stepper';
 import {CommonModule} from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-questionnaire',
@@ -24,13 +25,15 @@ import {CommonModule} from '@angular/common';
     MatInputModule,
     MatButtonModule,
     MatIconModule,
-    CommonModule
+    CommonModule,
+    RouterLink
   ],
   templateUrl: './questionnaire.component.html',
   styleUrl: './questionnaire.component.scss'
 })
 export class QuestionnaireComponent {
 
+  // 模板
   private _formBuilder = inject(FormBuilder);
 
   firstFormGroup = this._formBuilder.group({
@@ -40,11 +43,13 @@ export class QuestionnaireComponent {
     secondCtrl: ['', Validators.required],
   });
 
+
+
   isTrue: boolean = false;
 
   toggle () {
 
-    this.isTrue = true;
+    this.isTrue = !this.isTrue;
   }
 
   next () {
@@ -54,7 +59,7 @@ export class QuestionnaireComponent {
   arrayData: Array<any> = [
     {
       id: 1,
-      title: "第一個"
+      title: "貓科動物"
     },
     {
       id: 18,

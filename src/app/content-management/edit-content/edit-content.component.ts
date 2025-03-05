@@ -5,6 +5,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatStepperModule} from '@angular/material/stepper';
 import { RouterLink } from '@angular/router';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-edit-content',
@@ -16,13 +17,15 @@ import { RouterLink } from '@angular/router';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    RouterLink
+    RouterLink,
+    DragDropModule
   ],
   templateUrl: './edit-content.component.html',
   styleUrl: './edit-content.component.scss',
 })
 
 export class EditContentComponent{
+
 
 
 
@@ -73,6 +76,4 @@ export class EditContentComponent{
 
 
 }
-
-
 

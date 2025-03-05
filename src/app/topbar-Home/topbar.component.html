@@ -34,7 +34,7 @@
             <!-- 問卷所在 -->
             <div class="survey-card-container">
               @for (question of questionData; track $index) {
-                <div class="survey-card" (mouseenter)="showShadow()" (mouseleave)="closeShadow()">
+                <div class="survey-card" (mouseenter)="showShadow()" (mouseleave)="closeShadow()" routerLink="/questionnaire">
                   <p>id: {{question.id}}</p>
                   <div class="question-title-box">
                     <h2>{{question.title}}</h2>
@@ -52,28 +52,42 @@
 
     <!-- 彈出搜尋視窗 -->
     @if(isBoolean) {
-        <div class="card">
-            <div class="card-content">
-                <div class="field">
-                    <p class="control is-expanded has-icons-left">
-                      <input class="input" type="text" placeholder="Search ..." >
-                      <span class="icon is-small is-left">
-                        <i class='bx bx-search'></i>
-                      </span>
-                    </p>
-                  </div>
-                <p class="subtitle">搜尋紀錄</p>
-            </div>
-            <footer class="card-footer">
-              <p class="card-footer-item">
-                <input type="date">
-              </p>
-              <p class="card-footer-item">
-                <input type="date">
-              </p>
-            </footer>
+      <div class="card">
+        <div class="card-content">
+          <div class="field">
+            <p class="control is-expanded has-icons-left">
+              <input class="input" type="text" placeholder="Search ..." >
+              <span class="icon is-small is-left">
+                <i class='bx bx-search'></i>
+              </span>
+            </p>
+          </div>
+          <p class="subtitle">搜尋紀錄</p>
         </div>
-    }
+        <footer class="card-footer">
+          <p class="card-footer-item">
+            <input type="date">
+          </p>
+          <p class="card-footer-item">
+            <input type="date">
+          </p>
+        </footer>
+      </div>
+
+      <!-- 背景黑色透明遮罩 -->
+      <div class="mask-dark"
+      style="
+      background: rgba(0, 0, 0, 0.7);
+      position: absolute;
+      width: 100vw;
+      height: 100vh;
+      top: 0;
+      z-index: 1;
+      "
+      (click)="isBoolean = !isBoolean">
+      </div>
+        }
+
 
    <!-- 下列導航碼 -->
   <nav class="pagination is-rounded" role="navigation" aria-label="pagination">
