@@ -1,0 +1,133 @@
+
+
+@if (!isTrue) {
+  <!-- 問卷資訊 -->
+  <div class="card">
+    <div class="card-content">
+
+        <article class="message is-info">
+          <div class="message-header">
+            <h1 class="mg-title">如果你能變成動物，你想變成什麼動物?</h1>
+            <h5>問卷時間： 2025-02-28 ~ 2025-03-15</h5>
+          </div>
+          <div class="message-body">
+            <p>如果你有機會轉變成動物的形態，你會選擇成為哪一種動物，為什麼？你是否會選擇成為一種能在陸地上奔跑的陸生動物，以感受自由與速度的刺激，或者你更傾向於成為一種飛禽，能夠自由翱翔於天際？你的選擇是否受到對大自然的喜愛或對特定動物的崇敬所影響？又或者你會選擇成為一種水生生物，沉浸在深藍色的海洋中，享受寧靜和神秘的海底生活？你想透過變成某種特定的動物來體驗不同的感官和生活方式嗎？請分享你對這個想像情境的看法和理由。</p>
+          </div>
+        </article>
+
+      <!-- 受訪者資訊 -->
+        <div class="subtitle userInfo">
+          <div class="user-item">
+            <label for="">姓名：</label>
+            <input class="input is-info" type="text" placeholder="Info input"/>
+          </div>
+          <div class="user-item">
+            <label for="">年齡：</label>
+            <input class="input is-info" type="text" placeholder="Info input"/>
+          </div>
+          <div class="user-item">
+            <label for="">性別：</label>
+            <input type="radio" name="gender">男
+            <input type="radio" name="gender">女
+          </div>
+        </div>
+
+    </div>
+
+
+    <!-- 取消、確認按鍵 -->
+      <footer class="card-footer">
+        <p class="card-footer-item" routerLink="">
+
+        取消
+
+        </p>
+        <p class="card-footer-item" (click)="toggle()">
+
+        確認
+
+        </p>
+      </footer>
+  </div>
+}
+
+
+
+  @if(isTrue) {
+    <mat-stepper>
+      <!-- 只有 1 題 -->
+      @if(arrayData.length == 1) {
+        @for (data of arrayData; track $index) {
+          <mat-step label=".Question">
+            <div class="question-box">
+              <h1>{{data.title}}</h1>
+              <button mat-button matStepperNext>Finish</button>
+            </div>
+          </mat-step>
+        }
+      }
+
+
+      <!-- 只有 2 題 -->
+      @if(arrayData.length == 2) {
+        @for (data of arrayData; track $index) {
+          @if ($index < 1) {
+            <mat-step label=".Question">
+              <div class="question-box">
+              <h1>{{data.title}}</h1>
+                <button mat-button matStepperNext>Next</button>
+              </div>
+            </mat-step>
+          }
+          @if ($index == 1) {
+            <mat-step label=".Question">
+              <div class="question-box">
+                <h1>{{data.title}}</h1>
+                <button mat-button matStepperNext>Finish</button>
+              </div>
+            </mat-step>
+          }
+        }
+      }
+
+      <!-- 超過 3 題 -->
+      @if(arrayData.length >= 3) {
+        @for (data of arrayData; track $index) {
+            @if ($index < 2) {
+              <mat-step label=".Question">
+                <div class="question-box">
+                  <h1>{{data.title}}</h1>
+                  <button mat-button matStepperNext mat-flat-button>Next</button>
+                </div>
+              </mat-step>
+            }
+            @if ($index == 2 && arrayData.length > 3) {
+              <mat-step label=".Question">
+                <div class="question-box">
+                  <h1>{{data.title}}</h1>
+                  <button mat-button matStepperNext (click)="next()">Next</button>
+                </div>
+              </mat-step>
+            }
+            @if ($index == 2 && arrayData.length == 3) {
+            <mat-step label=".Question">
+              <div class="question-box">
+                <h1>{{data.title}}</h1>
+                <button mat-button matStepperNext>Finish</button>
+              </div>
+            </mat-step>
+            }
+        }
+      }
+    </mat-stepper>
+    <button class="button is-success" id="backBtn" (click)="toggle()">返回前頁</button>
+  }
+
+
+
+
+
+
+
+
+

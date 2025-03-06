@@ -1,0 +1,57 @@
+* {
+  padding: 0;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.container {
+  width: 100vw;
+  height: 1000vh;
+}
+
+.survey-select {
+  padding-left: 15px;
+  background: rgba(127, 226, 223, 0.6);
+  line-height: 40px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+}
+
+// 表單
+.table {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.table-main thead{
+  background: rgba(82, 229, 82, 0.7);
+  border-radius: 10px 10px 0px 0px;
+}
+
+// 調整標題頭間距
+.table-main thead th:nth-child(1) {
+  width: 10%;
+}
+
+.table-main thead th:nth-child(2) {
+  width: 35%;
+}
+
+.table-main thead th:nth-child(3) {
+  width: 40%;
+}
+
+.table-main thead th:nth-child(4) {
+  width: 15%;
+}
+
+// 問卷按鈕
+.survey-btn {
+  width: 5rem;
+  border: 3px groove rgba(21, 154, 187, 0.60);
+  border-radius: 15px;
+}
+
+.survey-btn:hover {
+  background-color: rgba(21, 154, 187);
+}

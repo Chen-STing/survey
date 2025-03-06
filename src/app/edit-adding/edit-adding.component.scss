@@ -1,0 +1,86 @@
+// 整體布局
+body {
+  position: relative;
+}
+
+.container {
+  padding-top: 5vh;
+  display: flex;
+}
+
+.hero-body p {
+  width: 8rem;
+  cursor: pointer;
+}
+
+// 左側功能區
+.functionZone {
+  width: 40vw;
+  margin-right: 2rem;
+}
+
+.add-quest {
+  padding: 5px;
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+  font-size: 1.5rem;
+  margin-bottom: 5px;
+}
+
+.add-quest span {
+  display: block;
+  font-size: 1rem;
+}
+
+.add-quest-option:hover {
+  background: rgba(139, 34, 236, 0.72);
+  cursor: pointer;
+}
+
+// 大綱
+.outline {
+  background: rgb(244, 164, 164);
+  text-align: center;
+}
+
+// 問卷主體
+.quest-main {
+  padding: 5px;
+  background: rgb(63, 207, 113);
+  width: 150vw;
+  text-align: center;
+}
+
+.quest-main h1 {
+  font-size: 2rem;
+  font-weight: 800;
+}
+
+.quest-box {
+  padding: 10px;
+  border: 1px dashed black;
+  margin-bottom: -1px;
+}
+
+.quest-box input {
+  margin-bottom: 15px;
+  width: 50%;
+}
+
+.quest-box i,.quest-box span {
+  font-size: 1.2rem;
+  line-height: 35px;
+  margin: 5px;
+}
+
+// 發布&儲存
+.save-push {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+}
+
+.save-push button {
+  margin: 3px;
+}

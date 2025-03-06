@@ -1,0 +1,71 @@
+* {
+  padding: 0;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.container {
+  width: 100vw;
+  height: 1000vh;
+}
+
+.survey-select {
+  padding-left: 15px;
+  background: rgb(208, 208, 219);
+  line-height: 40px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+}
+
+.count-main {
+  background: rgb(208, 208, 219);
+  border-radius: 10px;
+}
+
+// 標題狀態
+.title-stat {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  width: 90%;
+  border-bottom: 2.5px groove rgba(25, 25, 26, 0.45);
+  margin-bottom: 20px;
+}
+
+.title-stat h1 {
+  color: rgb(13, 94, 94);
+  margin-left: 2%;
+  font-weight: 700;
+  font-size: 2.5rem;
+}
+
+.title-stat span {
+  width: 3.5rem;
+  font-size: 1rem;
+  margin-right: 2%;
+}
+
+// 統計表單
+.count-box {
+  width: 80%;
+}
+
+.count-box h2 {
+  font-size: 20px;
+  color: #c57474;
+  margin-bottom: 10px;
+}
+
+.table {
+  width: 100%;
+}
+
+.table thead th:nth-child(1) {
+  width: 70%;
+}
+
+.table progress {
+  width: 60%;
+  margin-right: 5px;
+}
