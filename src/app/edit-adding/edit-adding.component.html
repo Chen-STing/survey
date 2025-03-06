@@ -45,10 +45,12 @@
     @if (questStat == "R") {
       <div class="quest-box">
         <div class="radio-quest">
-          <span>No. </span><input type="text" placeholder="問題標題"><br>
-          <i class='bx bx-radio-circle'></i><input type="text" placeholder="問題選項"><i class='bx bx-no-entry'></i>
+          <div id="radio-box">
+            <span>No. </span><input type="text"  class="input is-warning" placeholder="Title"><br>
+            <i class='bx bx-radio-circle'></i><input type="text" class="input is-warning" placeholder="問題選項"><i class='bx bx-no-entry'></i><br>
+          </div>
           <div class="selectZone">
-            <i class='bx bx-plus' ></i>
+            <i class='bx bx-plus' (click)="createRadio()"></i>
             <i class='bx bxs-trash-alt' ></i>
           </div>
         </div>
@@ -59,11 +61,17 @@
     @if (questStat == "C") {
       <div class="quest-box">
         <div class="checkbox-quest">
-          <span>No. </span><input type="text" placeholder="問題標題"><br>
-          <i class='bx bx-checkbox'></i><input type="text" placeholder="問題選項"><i class='bx bx-no-entry'></i><br>
-          <i class='bx bx-checkbox'></i><input type="text" placeholder="問題選項"><i class='bx bx-no-entry'></i><br>
+          <div id="check-box">
+            <span>No. </span><input type="text" class="input is-warning" placeholder="Title"><br>
+            <div class="check-option">
+              <i class='bx bx-checkbox'></i><input type="text" class="input is-warning" placeholder="問題選項"><i class='bx bx-no-entry' (click)="remove($event)"></i><br>
+            </div>
+            <div class="check-option">
+              <i class='bx bx-checkbox'></i><input type="text" class="input is-warning" placeholder="問題選項"><i class='bx bx-no-entry'></i><br>
+            </div>
+          </div>
           <div class="selectZone">
-            <i class='bx bx-plus' ></i>
+            <i class='bx bx-plus' (click)="createCheck()"></i>
             <i class='bx bxs-trash-alt' ></i>
           </div>
         </div>
@@ -74,13 +82,12 @@
     @if (questStat == "T") {
       <div class="quest-box">
         <div class="text-quest">
-          <span>No. </span><input type="text" placeholder="問題標題"><br>
+          <span>No. </span><input type="text" class="input is-warning" placeholder="Title"><br>
           <textarea
           class="textarea is-primary"
           placeholder="請輸入內容"
           ></textarea>
           <div class="selectZone">
-            <i class='bx bx-plus' ></i>
             <i class='bx bxs-trash-alt' ></i>
           </div>
         </div>
@@ -91,7 +98,7 @@
     @if (questStat == "A") {
       <div class="quest-box">
         <div class="Assessment-quest">
-          <span>No. </span><input type="text" placeholder="問題標題"><br>
+          <span>No. </span><input type="text" class="input is-warning" placeholder="Title"><br>
           <div>
             <i class='bx bx-star' ></i>
             <i class='bx bx-star' ></i>
@@ -100,7 +107,6 @@
             <i class='bx bx-star' ></i>
           </div>
           <div class="selectZone">
-            <i class='bx bx-plus' ></i>
             <i class='bx bxs-trash-alt' ></i>
           </div>
         </div>

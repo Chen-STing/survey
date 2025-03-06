@@ -34,17 +34,20 @@ body {
 }
 
 .add-quest-option:hover {
-  background: blueviolet;
+  background: rgba(139, 34, 236, 0.72);
+  cursor: pointer;
 }
 
+// 大綱
 .outline {
-  background: rgb(216, 120, 120);
+  background: rgb(244, 164, 164);
+  text-align: center;
 }
 
 // 問卷主體
 .quest-main {
   padding: 5px;
-  background: greenyellow;
+  background: rgb(63, 207, 113);
   width: 150vw;
   text-align: center;
 }
@@ -61,7 +64,14 @@ body {
 }
 
 .quest-box input {
-  margin-bottom: 3px;
+  margin-bottom: 15px;
+  width: 50%;
+}
+
+.quest-box i,.quest-box span {
+  font-size: 1.2rem;
+  line-height: 35px;
+  margin: 5px;
 }
 
 // 發布&儲存
