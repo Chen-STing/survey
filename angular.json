@@ -32,10 +32,14 @@
               }
             ],
             "styles": [
+              "src/styles.scss",
               "node_modules/boxicons/css/boxicons.min.css",
-              "src/styles.scss"
+              "node_modules/bulma/css/bulma.css"
             ],
-            "scripts": []
+
+            "scripts": [
+
+            ]
           },
           "configurations": {
             "production": {

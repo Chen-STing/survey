@@ -1,0 +1,93 @@
+* {
+  padding: 0;
+  margin: 0 auto;
+}
+
+.mat-stepper-horizontal {
+    margin-top: 8px;
+  }
+
+  .mat-mdc-form-field {
+    margin-top: 16px;
+  }
+
+.card {
+  margin-top: 5rem;
+  width: 80%;
+}
+
+// 問卷-簡介說明
+.message-header {
+  text-align: left;
+  position: relative;
+}
+
+.mg-title {
+  font-weight: 700;
+  font-size: 2rem;
+}
+
+.message-body {
+  padding: 25px;
+}
+
+// 受訪者資訊
+.userInfo {
+  text-align: center;
+  padding: 35px;
+}
+.input {
+  width: 50%;
+}
+.user-item {
+  padding: 15px;
+  line-height: 40px;
+}
+.user-item:nth-child(3) input {
+  width: 25px;
+}
+
+// 取消確認按鈕
+.card-footer {
+  background: rgba(42, 182, 193, 0.6);
+  cursor: pointer; 
+}
+
+.card-footer-item:nth-child(1):hover {
+  color: rgb(176, 244, 30);
+  background: rgba(42, 182, 193);
+  border-radius: 0px 0px 0px 10px;
+}
+
+.card-footer-item:nth-child(2):hover {
+  color: rgb(176, 244, 30);
+  background: rgba(42, 182, 193);
+  border-radius: 0px 0px 10px 0px;
+}
+
+// 問卷選項
+.question-box {
+  position: relative;
+  margin-top: 5rem;
+  text-align: center;
+  height: 37rem;
+}
+
+.question-box button {
+  font-size: 1.3rem;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+
+// 切換按鈕
+.active {
+  display: none;
+}
+
+// 返回前頁按鈕
+#backBtn {
+  font-size: 1.5rem;
+  margin-left: 1rem;
+}
