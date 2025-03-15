@@ -1,12 +1,23 @@
 <div class="container">
     <div class="survey-select">
-      <label for="">選擇問卷：</label>
+      <!-- <label for="">選擇問卷：</label>
       <div class="select is-success">
         <select>
           <option>Select dropdown</option>
           <option>With options</option>
         </select>
+      </div> -->
+
+      <div class="paste-button">
+        <button class="button">Paste &nbsp; ▼</button>
+        <div class="dropdown-content">
+          <a id="top">Keep source formatting</a>
+          <a id="middle">Merge formatting</a>
+          <a id="bottom">Keep text only</a>
+        </div>
       </div>
+      
+
     </div>
 
   <div class="count-main">
@@ -67,13 +78,13 @@
       <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="center">
         <mat-tab label="圓餅圖">
 
-            <canvas id="chart_pie" loading="lazy"></canvas>
+            <canvas id="chart_bar"></canvas>
 
 
         </mat-tab>
         <mat-tab label="長條圖">
 
-            <canvas id="chart_bar" loading="lazy"></canvas>
+            <!-- <canvas id="chart_bar"></canvas> -->
 
 
         </mat-tab>

@@ -19,11 +19,11 @@
         <div class="subtitle userInfo">
           <div class="user-item">
             <label for="">姓名：</label>
-            <input class="input is-info" type="text" placeholder="Info input"/>
+            <input class="input is-info" type="text" placeholder="請輸入您的名字"/>
           </div>
           <div class="user-item">
             <label for="">年齡：</label>
-            <input class="input is-info" type="text" placeholder="Info input"/>
+            <input class="input is-info" type="text" placeholder="請輸入您的年齡"/>
           </div>
           <div class="user-item">
             <label for="">性別：</label>
@@ -61,6 +61,79 @@
           <mat-step label=".Question">
             <div class="question-box">
               <h1>{{data.title}}</h1>
+
+              <div class="option-box control">
+
+                <!-- 單選題 -->
+                @if (data.questStat == "R") {
+                  @for (option of data.option; track $index) {
+                    <label class="radio">
+                      <input type="radio" name="{{data.id}}" />
+                      {{data.option[$index]}}
+                    </label>
+                  }
+                  @switch (data.option.length % 3) {
+                    @case (1) {
+                      <!-- 補2個空白對齊 -->
+                      <label class="radio"></label>
+                      <label class="radio"></label>
+                    }
+                    @case (2) {
+                      <!-- 補1個空白對齊 -->
+                      <label class="radio"></label>
+                    }
+                  }
+                }
+
+                  <!-- 多選題 -->
+                  @if (data.questStat == "C") {
+                    @for (option of data.option; track $index) {
+                      <label class="checkbox">
+                        <input type="checkbox" name="{{data.id}}" />
+                        {{data.option[$index]}}
+                      </label>
+                    }
+                    @switch (data.option.length % 4) {
+                      @case (1) {
+                        <!-- 補3個空白對齊 -->
+                        <label class="checkbox"></label>
+                        <label class="checkbox"></label>
+                        <label class="checkbox"></label>
+                      }
+                      @case (2) {
+                        <!-- 補2個空白對齊 -->
+                        <label class="checkbox"></label>
+                        <label class="checkbox"></label>
+                      }
+                      @case (3) {
+                        <!-- 補1個空白對齊 -->
+                        <label class="checkbox"></label>
+                      }
+                    }
+                  }
+
+                  <!-- 文字題 -->
+                  @if (data.questStat == "T") {
+                    <textarea
+                      class="textarea"
+                      placeholder="10 lines of textarea"
+                      rows="10"
+                    ></textarea>
+                    }
+
+                  <!-- 評量題 -->
+                  @if (data.questStat == "S") {
+                    <div class="option-star">
+                      <i class='bx bxs-star' id="1" (click)="selectStar($event)"></i>
+                      <i class='bx bxs-star' id="2" (click)="selectStar($event)"></i>
+                      <i class='bx bxs-star' id="3" (click)="selectStar($event)"></i>
+                      <i class='bx bxs-star' id="4" (click)="selectStar($event)"></i>
+                      <i class='bx bxs-star' id="5" (click)="selectStar($event)"></i>
+                    </div>
+                    }
+
+              </div>
+
               <button mat-button matStepperNext>Finish</button>
             </div>
           </mat-step>
@@ -75,7 +148,80 @@
             <mat-step label=".Question">
               <div class="question-box">
               <h1>{{data.title}}</h1>
-                <button mat-button matStepperNext>Next</button>
+
+              <div class="option-box control">
+
+                <!-- 單選題 -->
+                @if (data.questStat == "R") {
+                  @for (option of data.option; track $index) {
+                    <label class="radio">
+                      <input type="radio" name="{{data.id}}" />
+                      {{data.option[$index]}}
+                    </label>
+                  }
+                  @switch (data.option.length % 3) {
+                    @case (1) {
+                      <!-- 補2個空白對齊 -->
+                      <label class="radio"></label>
+                      <label class="radio"></label>
+                    }
+                    @case (2) {
+                      <!-- 補1個空白對齊 -->
+                      <label class="radio"></label>
+                    }
+                  }
+                }
+
+                  <!-- 多選題 -->
+                  @if (data.questStat == "C") {
+                    @for (option of data.option; track $index) {
+                      <label class="checkbox">
+                        <input type="checkbox" name="{{data.id}}" />
+                        {{data.option[$index]}}
+                      </label>
+                    }
+                    @switch (data.option.length % 4) {
+                      @case (1) {
+                        <!-- 補3個空白對齊 -->
+                        <label class="checkbox"></label>
+                        <label class="checkbox"></label>
+                        <label class="checkbox"></label>
+                      }
+                      @case (2) {
+                        <!-- 補2個空白對齊 -->
+                        <label class="checkbox"></label>
+                        <label class="checkbox"></label>
+                      }
+                      @case (3) {
+                        <!-- 補1個空白對齊 -->
+                        <label class="checkbox"></label>
+                      }
+                    }
+                  }
+
+                  <!-- 文字題 -->
+                  @if (data.questStat == "T") {
+                    <textarea
+                      class="textarea"
+                      placeholder="10 lines of textarea"
+                      rows="10"
+                    ></textarea>
+                    }
+
+                  <!-- 評量題 -->
+                  @if (data.questStat == "S") {
+                    <div class="option-star">
+                      <i class='bx bxs-star' id="1" (click)="selectStar($event)"></i>
+                      <i class='bx bxs-star' id="2" (click)="selectStar($event)"></i>
+                      <i class='bx bxs-star' id="3" (click)="selectStar($event)"></i>
+                      <i class='bx bxs-star' id="4" (click)="selectStar($event)"></i>
+                      <i class='bx bxs-star' id="5" (click)="selectStar($event)"></i>
+                    </div>
+                    }
+
+              </div>
+
+              <button mat-button matStepperNext>Next</button>
               </div>
             </mat-step>
           }
@@ -83,6 +229,79 @@
             <mat-step label=".Question">
               <div class="question-box">
                 <h1>{{data.title}}</h1>
+
+                <div class="option-box control">
+
+                  <!-- 單選題 -->
+                  @if (data.questStat == "R") {
+                    @for (option of data.option; track $index) {
+                      <label class="radio">
+                        <input type="radio" name="{{data.id}}" />
+                        {{data.option[$index]}}
+                      </label>
+                    }
+                    @switch (data.option.length % 3) {
+                      @case (1) {
+                        <!-- 補2個空白對齊 -->
+                        <label class="radio"></label>
+                        <label class="radio"></label>
+                      }
+                      @case (2) {
+                        <!-- 補1個空白對齊 -->
+                        <label class="radio"></label>
+                      }
+                    }
+                  }
+
+                    <!-- 多選題 -->
+                    @if (data.questStat == "C") {
+                      @for (option of data.option; track $index) {
+                        <label class="checkbox">
+                          <input type="checkbox" name="{{data.id}}" />
+                          {{data.option[$index]}}
+                        </label>
+                      }
+                      @switch (data.option.length % 4) {
+                        @case (1) {
+                          <!-- 補3個空白對齊 -->
+                          <label class="checkbox"></label>
+                          <label class="checkbox"></label>
+                          <label class="checkbox"></label>
+                        }
+                        @case (2) {
+                          <!-- 補2個空白對齊 -->
+                          <label class="checkbox"></label>
+                          <label class="checkbox"></label>
+                        }
+                        @case (3) {
+                          <!-- 補1個空白對齊 -->
+                          <label class="checkbox"></label>
+                        }
+                      }
+                    }
+
+                    <!-- 文字題 -->
+                    @if (data.questStat == "T") {
+                      <textarea
+                        class="textarea"
+                        placeholder="10 lines of textarea"
+                        rows="10"
+                      ></textarea>
+                      }
+
+                    <!-- 評量題 -->
+                    @if (data.questStat == "S") {
+                      <div class="option-star">
+                        <i class='bx bxs-star' id="1" (click)="selectStar($event)"></i>
+                        <i class='bx bxs-star' id="2" (click)="selectStar($event)"></i>
+                        <i class='bx bxs-star' id="3" (click)="selectStar($event)"></i>
+                        <i class='bx bxs-star' id="4" (click)="selectStar($event)"></i>
+                        <i class='bx bxs-star' id="5" (click)="selectStar($event)"></i>
+                      </div>
+                      }
+
+                </div>
+
                 <button mat-button matStepperNext>Finish</button>
               </div>
             </mat-step>
@@ -97,22 +316,244 @@
               <mat-step label=".Question">
                 <div class="question-box">
                   <h1>{{data.title}}</h1>
+
+                  <div class="option-box control">
+
+                    <!-- 單選題 -->
+                    @if (data.questStat == "R") {
+                      @for (option of data.option; track $index) {
+                        <label class="radio">
+                          <input type="radio" name="{{data.id}}" />
+                          {{data.option[$index]}}
+                        </label>
+                      }
+                      @switch (data.option.length % 3) {
+                        @case (1) {
+                          <!-- 補2個空白對齊 -->
+                          <label class="radio"></label>
+                          <label class="radio"></label>
+                        }
+                        @case (2) {
+                          <!-- 補1個空白對齊 -->
+                          <label class="radio"></label>
+                        }
+                      }
+                    }
+
+                      <!-- 多選題 -->
+                      @if (data.questStat == "C") {
+                        @for (option of data.option; track $index) {
+                          <label class="checkbox">
+                            <input type="checkbox" name="{{data.id}}" />
+                            {{data.option[$index]}}
+                          </label>
+                        }
+                        @switch (data.option.length % 4) {
+                          @case (1) {
+                            <!-- 補3個空白對齊 -->
+                            <label class="checkbox"></label>
+                            <label class="checkbox"></label>
+                            <label class="checkbox"></label>
+                          }
+                          @case (2) {
+                            <!-- 補2個空白對齊 -->
+                            <label class="checkbox"></label>
+                            <label class="checkbox"></label>
+                          }
+                          @case (3) {
+                            <!-- 補1個空白對齊 -->
+                            <label class="checkbox"></label>
+                          }
+                        }
+                      }
+
+                      <!-- 文字題 -->
+                      @if (data.questStat == "T") {
+                        <textarea
+                          class="textarea"
+                          placeholder="10 lines of textarea"
+                          rows="10"
+                        ></textarea>
+                        }
+
+                      <!-- 評量題 -->
+                      @if (data.questStat == "S") {
+                        <div class="option-star">
+                          <i class='bx bxs-star' id="1" (click)="selectStar($event)"></i>
+                          <i class='bx bxs-star' id="2" (click)="selectStar($event)"></i>
+                          <i class='bx bxs-star' id="3" (click)="selectStar($event)"></i>
+                          <i class='bx bxs-star' id="4" (click)="selectStar($event)"></i>
+                          <i class='bx bxs-star' id="5" (click)="selectStar($event)"></i>
+                        </div>
+                        }
+
+                  </div>
+
                   <button mat-button matStepperNext mat-flat-button>Next</button>
                 </div>
               </mat-step>
             }
+
             @if ($index == 2 && arrayData.length > 3) {
               <mat-step label=".Question">
                 <div class="question-box">
                   <h1>{{data.title}}</h1>
+
+                  <div class="option-box control">
+
+                    <!-- 單選題 -->
+                    @if (data.questStat == "R") {
+                      @for (option of data.option; track $index) {
+                        <label class="radio">
+                          <input type="radio" name="{{data.id}}" />
+                          {{data.option[$index]}}
+                        </label>
+                      }
+                      @switch (data.option.length % 3) {
+                        @case (1) {
+                          <!-- 補2個空白對齊 -->
+                          <label class="radio"></label>
+                          <label class="radio"></label>
+                        }
+                        @case (2) {
+                          <!-- 補1個空白對齊 -->
+                          <label class="radio"></label>
+                        }
+                      }
+                    }
+
+                      <!-- 多選題 -->
+                      @if (data.questStat == "C") {
+                        @for (option of data.option; track $index) {
+                          <label class="checkbox">
+                            <input type="checkbox" name="{{data.id}}" />
+                            {{data.option[$index]}}
+                          </label>
+                        }
+                        @switch (data.option.length % 4) {
+                          @case (1) {
+                            <!-- 補3個空白對齊 -->
+                            <label class="checkbox"></label>
+                            <label class="checkbox"></label>
+                            <label class="checkbox"></label>
+                          }
+                          @case (2) {
+                            <!-- 補2個空白對齊 -->
+                            <label class="checkbox"></label>
+                            <label class="checkbox"></label>
+                          }
+                          @case (3) {
+                            <!-- 補1個空白對齊 -->
+                            <label class="checkbox"></label>
+                          }
+                        }
+                      }
+
+                      <!-- 文字題 -->
+                      @if (data.questStat == "T") {
+                        <textarea
+                          class="textarea"
+                          placeholder="10 lines of textarea"
+                          rows="10"
+                        ></textarea>
+                        }
+
+                      <!-- 評量題 -->
+                      @if (data.questStat == "S") {
+                        <div class="option-star">
+                          <i class='bx bxs-star' id="1" (click)="selectStar($event)"></i>
+                          <i class='bx bxs-star' id="2" (click)="selectStar($event)"></i>
+                          <i class='bx bxs-star' id="3" (click)="selectStar($event)"></i>
+                          <i class='bx bxs-star' id="4" (click)="selectStar($event)"></i>
+                          <i class='bx bxs-star' id="5" (click)="selectStar($event)"></i>
+                        </div>
+                        }
+
+                  </div>
+
                   <button mat-button matStepperNext (click)="next()">Next</button>
                 </div>
               </mat-step>
             }
+
             @if ($index == 2 && arrayData.length == 3) {
             <mat-step label=".Question">
               <div class="question-box">
                 <h1>{{data.title}}</h1>
+
+
+                <div class="option-box control">
+
+                  <!-- 單選題 -->
+                  @if (data.questStat == "R") {
+                    @for (option of data.option; track $index) {
+                      <label class="radio">
+                        <input type="radio" name="{{data.id}}" />
+                        {{data.option[$index]}}
+                      </label>
+                    }
+                    @switch (data.option.length % 3) {
+                      @case (1) {
+                        <!-- 補2個空白對齊 -->
+                        <label class="radio"></label>
+                        <label class="radio"></label>
+                      }
+                      @case (2) {
+                        <!-- 補1個空白對齊 -->
+                        <label class="radio"></label>
+                      }
+                    }
+                  }
+
+                    <!-- 多選題 -->
+                    @if (data.questStat == "C") {
+                      @for (option of data.option; track $index) {
+                        <label class="checkbox">
+                          <input type="checkbox" name="{{data.id}}" />
+                          {{data.option[$index]}}
+                        </label>
+                      }
+                      @switch (data.option.length % 4) {
+                        @case (1) {
+                          <!-- 補3個空白對齊 -->
+                          <label class="checkbox"></label>
+                          <label class="checkbox"></label>
+                          <label class="checkbox"></label>
+                        }
+                        @case (2) {
+                          <!-- 補2個空白對齊 -->
+                          <label class="checkbox"></label>
+                          <label class="checkbox"></label>
+                        }
+                        @case (3) {
+                          <!-- 補1個空白對齊 -->
+                          <label class="checkbox"></label>
+                        }
+                      }
+                    }
+
+                    <!-- 文字題 -->
+                    @if (data.questStat == "T") {
+                      <textarea
+                        class="textarea"
+                        placeholder="10 lines of textarea"
+                        rows="10"
+                      ></textarea>
+                      }
+
+                    <!-- 評量題 -->
+                    @if (data.questStat == "S") {
+                      <div class="option-star">
+                        <i class='bx bxs-star' id="1" (click)="selectStar($event)"></i>
+                        <i class='bx bxs-star' id="2" (click)="selectStar($event)"></i>
+                        <i class='bx bxs-star' id="3" (click)="selectStar($event)"></i>
+                        <i class='bx bxs-star' id="4" (click)="selectStar($event)"></i>
+                        <i class='bx bxs-star' id="5" (click)="selectStar($event)"></i>
+                      </div>
+                      }
+
+                </div>
+
                 <button mat-button matStepperNext>Finish</button>
               </div>
             </mat-step>
@@ -122,7 +563,6 @@
     </mat-stepper>
     <button class="button is-success" id="backBtn" (click)="toggle()">返回前頁</button>
   }
-
 
 
 

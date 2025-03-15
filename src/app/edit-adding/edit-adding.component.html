@@ -10,7 +10,7 @@
 <div class="container">
   <div class="functionZone">
      <!-- 選擇題型 -->
-    <div class="add-quest">
+    <!-- <div class="add-quest">
       <p class="add-quest-option" (click)="selectQuestStat(1)">
         <i class='bx bx-radio-circle-marked'></i>
         <span>單選題</span>
@@ -27,7 +27,42 @@
         <i class='bx bx-star' ></i>
         <span>評量題</span>
       </p>
-    </div>
+    </div> -->
+
+
+    
+<div class="menu">
+  <div class="link" (click)="selectQuestStat(1)">
+      <p class="add-quest-option link-icon">
+        <i class='bx bx-radio-circle-marked'></i>
+      </p>
+    <span class="link-title">單選題</span>
+  </div>
+  <div class="link" (click)="selectQuestStat(2)">
+    <p class="add-quest-option link-icon">
+      <i class='bx bx-check-square'></i>
+    </p>
+    <span class="link-title">多選題</span>
+  </div>
+  <div class="link"  (click)="selectQuestStat(3)">
+    <p class="add-quest-option link-icon">
+      <i class='bx bx-notepad'></i>
+    </p>
+    <span class="link-title">文字題</span>
+  </div>
+
+  <div class="link" (click)="selectQuestStat(4)">
+    <p class="add-quest-option link-icon">
+      <i class='bx bx-star' ></i>
+    </p>
+    <span class="link-title">評量題</span>
+  </div>
+
+</div>
+
+
+
+
 
     <div class="outline">
       大綱

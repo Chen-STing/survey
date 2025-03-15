@@ -2,12 +2,20 @@
 <div class="container">
   <!-- 創建、刪除按鈕 -->
   <div class="create-delete">
-    <button class="button is-info is-focused" (click)="isTrue = !isTrue">
-      <i class='bx bx-plus-medical'></i>
-    </button>
-    <button class="button is-info is-focused">
-      <i class='bx bxs-trash-alt' ></i>
-    </button>
+   
+    <div class="card">
+      <span>Edit</span>
+
+        <div class="social-link" (click)="isTrue = !isTrue">
+          <i class='bx bx-plus-medical'></i>新增
+        </div>
+
+        <div class="social-link">
+          <i class='bx bxs-trash-alt' ></i>刪除
+        </div>
+    </div>
+
+
   </div>
 
   <!-- 表格本體 -->
@@ -72,7 +80,7 @@
 
             <div class="field">
               <p class="control has-icons-left has-icons-right">
-                <input class="input" type="text" placeholder="Survey" />
+                <input class="input" type="text" placeholder="請輸入名稱" />
                 <span class="icon is-small is-left">
                   <i class='bx bxs-edit' ></i>
                 </span>
@@ -94,7 +102,7 @@
 
             <div class="field">
               <p class="control has-icons-left has-icons-right">
-                <textarea class="textarea" placeholder="問卷說明"></textarea>
+                <textarea class="textarea" placeholder="請輸入內容"></textarea>
               </p>
             </div>
 
@@ -142,8 +150,8 @@
           </form>
         </mat-step>
         <mat-step>
-          <ng-template matStepLabel>Done</ng-template>
-          You are now done.
+          <ng-template matStepLabel>完成</ng-template>
+          確認後，請往下一步
           <div>
             <button mat-button matStepperPrevious>Back</button>
             <button mat-button routerLink="/adding">Next</button>

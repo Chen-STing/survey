@@ -22,7 +22,7 @@ export class TopbarComponent {
 
 
   showShadow() {
-    this.newStyle.innerHTML = '.survey-card-container:hover .survey-card {filter: blur(5px); transform: scale(0.7);}';
+    this.newStyle.innerHTML = '.subs:hover .sub-circle {filter: blur(5px); transform: scale(0.7);}';
     document.head.appendChild(this.newStyle);
   };
 
@@ -40,16 +40,6 @@ export class TopbarComponent {
     }
   }
 
-  // changeInput(event: Event) {
-  //   let tidyData: PeriodicElement[] = [];
-  //   console.log((event.target as HTMLInputElement).value);
-  //   for (let data of this.questionData) {
-  //     if (data.title.indexOf((event.target as HTMLInputElement).value) != -1) {
-  //       tidyData.push(data);
-  //       this.questionData = tidyData;
-  //     }
-  //   }
-  // }
 
   questionData: Array<any> = [
     {
@@ -88,8 +78,8 @@ export class TopbarComponent {
       endTime: "2025-03-02"
     },
     {
-      id: 8,
-      title: "木柵動物園裡，請挑選出你最喜歡動物的前三名，並且說明一下原因",
+      id: 118,
+      title: "木柵動物園裡，請挑選出你最喜歡動物的前三名，並且說明一下原因請挑選出你最喜歡動物的前三名，並且說明一下原因",
       endTime: "2025-03-10"
     },
     {

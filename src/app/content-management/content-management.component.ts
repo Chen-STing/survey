@@ -25,14 +25,7 @@ export class ContentManagementComponent {
 
   isTrue: boolean = false;
 
-  newStyle: HTMLStyleElement = document.createElement('style');
-
-
-
-  // change () {
-  //   this.newStyle.innerHTML = '#backDirection {display: none;}';
-  //   document.head.appendChild(this.newStyle);
-  // };
+ 
 
 
 }
