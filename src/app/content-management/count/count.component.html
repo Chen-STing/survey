@@ -1,99 +1,87 @@
-<div class="container">
-    <div class="survey-select">
-      <!-- <label for="">選擇問卷：</label>
-      <div class="select is-success">
-        <select>
-          <option>Select dropdown</option>
-          <option>With options</option>
-        </select>
-      </div> -->
 
-      <div class="paste-button">
-        <button class="button">Paste &nbsp; ▼</button>
-        <div class="dropdown-content">
-          <a id="top">Keep source formatting</a>
-          <a id="middle">Merge formatting</a>
-          <a id="bottom">Keep text only</a>
-        </div>
-      </div>
-
-
-    </div>
-
-  <div class="count-main">
-    <div class="title-stat">
-      <h1>問卷名稱</h1>
-      <span class="tag is-warning">收集中</span>
-    </div>
-
-    <nav class="level">
-      <div class="level-item has-text-centered">
-        <div>
-          <p class="heading">Male</p>
-          <p class="title">3,456</p>
-        </div>
-      </div>
-      <div class="level-item has-text-centered">
-        <div>
-          <p class="heading">Female</p>
-          <p class="title">123</p>
-        </div>
-      </div>
-      <div class="level-item has-text-centered">
-        <div>
-          <p class="heading">問卷數</p>
-          <p class="title">456K</p>
-        </div>
-      </div>
-    </nav>
-
-    <div style="
-    width: 90%;
-    border-bottom: 2.5px groove rgba(25, 25, 26, 0.45);
-    margin-bottom: 20px;
-    "></div>
-
-    <div class="count-box">
-      <h2>1. 題目</h2>
-      <table class="table">
-        <thead>
-          <tr>
-            <th>選項</th>
-            <th>頻次比例</th>
-            <th><abbr title="Points">頻次</abbr></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th>1</th>
-            <td>
-              <progress value="10" max="100"></progress>
-              <span>10%</span>
-            </td>
-            <td>23</td>
-          </tr>
-        </tbody>
-      </table>
-
-      <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="center">
-        <mat-tab label="圓餅圖" class="chartjs">
-
-            <canvas id="chart_bar"></canvas>
-
-
-        </mat-tab>
-        <mat-tab label="長條圖">
-
-            <canvas id="chart" loading="lazy"></canvas>
-
-
-        </mat-tab>
-      </mat-tab-group>
-
-
-    </div>
+<div class="survey-select">
+  <div class="select is-rounded">
+    <select>
+      <option value="">-請選擇問卷-</option>
+      <option>Rounded dropdown</option>
+      <option>With options</option>
+    </select>
   </div>
-
-
 </div>
+
+  <div class="containerCount">
+
+
+
+      <div class="title-stat">
+        <h1>問卷名稱</h1>
+        <span class="tag is-warning">收集中</span>
+      </div>
+
+      <nav class="level">
+        <div class="level-item has-text-centered">
+          <div>
+            <p class="heading">Male</p>
+            <p class="title">3,456</p>
+          </div>
+        </div>
+        <div class="level-item has-text-centered">
+          <div>
+            <p class="heading">Female</p>
+            <p class="title">123</p>
+          </div>
+        </div>
+        <div class="level-item has-text-centered">
+          <div>
+            <p class="heading">問卷數</p>
+            <p class="title">456K</p>
+          </div>
+        </div>
+      </nav>
+
+      <div style="
+      width: 90%;
+      border-bottom: 2.5px groove rgba(25, 25, 26, 0.45);
+      margin-bottom: 20px;
+      "></div>
+
+      <div class="count-box">
+
+        <div class="select is-normal">
+          <select>
+            <option>-請選擇題目-</option>
+            <option>Select dropdown</option>
+            <option>With options</option>
+          </select>
+        </div>
+
+        <h2>1. 題目</h2>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>選項</th>
+              <th>頻次比例</th>
+              <th><abbr title="Points">頻次</abbr></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>1</th>
+              <td>
+                <progress value="10" max="100"></progress>
+                <span>10%</span>
+              </td>
+              <td>23</td>
+            </tr>
+          </tbody>
+        </table>
+
+
+
+
+      </div>
+
+
+
+  </div>
 

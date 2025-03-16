@@ -5,19 +5,24 @@
 
 // 布局大小
 
-.container {
-  position: relative;
-  width: 80vw;
-}
-
-.table {
-  width: 77vw;
+.containerEdit {
+  width: 95%;
+  height: auto;
+  border-radius: 15px;
+  background: #252931;
+  padding: 15px;
+  margin-top: 20px;
+  margin-left: 30px;
 }
 
 // 創建&&刪除
-.create-delete i {
-  font-size: 17px;
-  margin-right: 1px;
+.create-delete {
+  margin-top: 20px;
+  margin-left: 30px;
+  i {
+    font-size: 17px;
+    margin-right: 1px;
+  }
 }
 
 .card {
@@ -129,29 +134,44 @@
   }
 }
 
-
-// 表單設計
-.table-head {
-  background: rgba(26, 26, 235, 0.7);
+// 表格本體
+nz-table {
+  tbody {
+    background: #5e6ec9;
+  }
+  th {
+    background: #303e91;
+    color: rgb(106, 157, 194);
+    font-size: 18px;
+  }
+  // 勾選框
+  th:nth-child(1) {
+    width: 3%;
+  }
+  // id
+  th:nth-child(2) {
+    width: 10%;
+  }
+  // 標題
+  th:nth-child(3) {
+    width: 40%;
+  }
+  // 開始時間
+  th:nth-child(4) {
+    width: 20%;
+  }
+  // 開始時間
+  th:nth-child(5) {
+    width: 15%;
+  }
+  tr:nth-child(odd) {
+    background: #48a6e1;
+  }
+  td span {
+    width: 50px;
+  }
 }
 
-.table-head th {
-  font-size: 1.8rem;
-
-}
-
-tbody {
-  font-size: 1.3rem;
-}
-
-// 模板內容
-.mat-stepper-vertical {
-  margin-top: 8px;
-}
-
-.mat-mdc-form-field {
-  margin-top: 16px;
-}
 
 // 創建視窗
 .create-box {
@@ -162,10 +182,6 @@ tbody {
   width: 30%;
   border-radius: 20px;
   z-index: 100;
-}
-
-textarea {
-  width: 100%;
 }
 
 .message-header {

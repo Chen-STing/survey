@@ -24,6 +24,7 @@
     "bulma": "^1.0.3",
     "chart.js": "^4.4.8",
     "foundation-sites": "^6.9.0",
+    "ng-zorro-antd": "^19.1.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "uikit": "^3.23.1",

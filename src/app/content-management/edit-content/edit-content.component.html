@@ -1,67 +1,74 @@
+<!-- 創建、刪除按鈕 -->
+<div class="create-delete">
 
-<div class="container">
-  <!-- 創建、刪除按鈕 -->
-  <div class="create-delete">
-   
-    <div class="card">
-      <span>Edit</span>
+  <div class="card">
+    <span>Edit</span>
 
-        <div class="social-link" (click)="isTrue = !isTrue">
-          <i class='bx bx-plus-medical'></i>新增
-        </div>
+      <div class="social-link" (click)="isTrue = !isTrue">
+        <i class='bx bx-plus-medical'></i>新增
+      </div>
 
-        <div class="social-link">
-          <i class='bx bxs-trash-alt' ></i>刪除
-        </div>
-    </div>
-
-
+      <div class="social-link">
+        <i class='bx bxs-trash-alt' ></i>刪除
+      </div>
   </div>
 
-  <!-- 表格本體 -->
-  <table class="table is-striped is-fullwidth">
-    <thead class="table-head">
+
+</div>
+
+<div class="containerEdit">
+
+  <nz-table #sortTable [nzData]="listOfData" nzTableLayout="fixed" nzHideOnSinglePage nzPaginationPosition="top">
+    <thead>
       <tr>
         <th><input type="checkbox"></th>
-        <th>Id</th>
-        <th>問卷名稱</th>
-        <th>創建時間</th>
-        <th>截止日期</th>
-        <th>狀態</th>
-        <th>操作</th>
+        @for (column of listOfColumn; track column) {
+          @if (column.title == "狀態") {
+            <th [nzSortFn]="column.compare"
+            [nzFilterMultiple]="column.filterMultiple"
+            [nzFilters]="column.listOfFilter"
+            [nzFilterFn]="column.filterFn">
+            {{ column.title }}
+            </th>
+          }@else {
+            <th [nzSortFn]="column.compare">
+              {{ column.title }}
+            </th>
+          }
+        }
       </tr>
     </thead>
-
     <tbody>
-      @for(data of questionData; track $index) {
-
-        <tr class="table-row">
-
+      @for (data of sortTable.data; track data) {
+        <tr>
           <td><input type="checkbox"></td>
-          <th>{{data.id}}</th>
-          <td>{{data.title}}</td>
-          <td>-</td>
-          <td>{{data.endTime}}</td>
-          <td>-</td>
-          <td>-</td>
-
+          <td>{{ data.id }}</td>
+          <td>{{ data.title }}</td>
+          <td>{{ data.startTime }}</td>
+          <td>{{ data.endTime }}</td>
+          @switch (data.status) {
+            @case ('編輯中') {
+              <td>
+                <span class="tag is-warning">編輯中</span>
+              </td>
+            }
+            @case ('已結束') {
+              <td>
+                <span class="tag is-success">收集中</span>
+              </td>
+            }
+            @case ('收集中') {
+              <td>
+                <span class="tag is-dark">已結束</span>
+              </td>
+            }
+          }
         </tr>
-
       }
     </tbody>
+  </nz-table>
 
 
-
-  </table>
-
-  <!-- 切換頁面功能 -->
-  <!-- <mat-paginator #paginator
-               [length]="totalCount"
-               [pageIndex]="0"
-               [pageSize]="10"
-               [pageSizeOptions]="[5, 10, 15]"
-               (page)="pageChange($event)">
-  </mat-paginator> -->
 
   <!-- 彈出創建盒子 -->
   @if(isTrue) {
@@ -73,82 +80,44 @@
         </div>
       </article>
 
-      <mat-vertical-stepper [linear]="false" #stepper>
-        <mat-step [stepControl]="firstFormGroup">
+      <mat-stepper orientation="vertical">
+        <mat-step>
           <form [formGroup]="firstFormGroup">
-            <ng-template matStepLabel>問卷名稱</ng-template>
+            <ng-template matStepLabel>問卷名稱 & 內容</ng-template>
 
             <div class="field">
-              <p class="control has-icons-left has-icons-right">
-                <input class="input" type="text" placeholder="請輸入名稱" />
+              <div class="control has-icons-left has-icons-right">
+                <input class="input" type="text" placeholder="請輸入名稱" formControlName="title" required>
+                <p class="control has-icons-left has-icons-right">
+                  <textarea class="textarea" placeholder="請輸入內容" formControlName="content" required ></textarea>
+                </p>
                 <span class="icon is-small is-left">
                   <i class='bx bxs-edit' ></i>
                 </span>
                 <span class="icon is-small is-right">
                   <i class='bx bx-check'></i>
                 </span>
-              </p>
+              </div>
             </div>
-
             <div>
-              <button mat-button matStepperNext>Next</button>
+              <button mat-button matStepperNext (click)="getFormValueFirst()">Next</button>
             </div>
           </form>
         </mat-step>
 
-        <mat-step [stepControl]="secondFormGroup">
+        <mat-step>
           <form [formGroup]="secondFormGroup">
-            <ng-template matStepLabel>問卷說明</ng-template>
-
+            <ng-template matStepLabel>開始日期 - 結束日期</ng-template>
             <div class="field">
-              <p class="control has-icons-left has-icons-right">
-                <textarea class="textarea" placeholder="請輸入內容"></textarea>
-              </p>
+              <nz-range-picker formControlName="date" nzSize='large' style="width: 100%;height: 45px;"></nz-range-picker>
             </div>
-
             <div>
               <button mat-button matStepperPrevious>Back</button>
-              <button mat-button matStepperNext>Next</button>
+              <button mat-button matStepperNext (click)="getFormValueSecond()">Next</button>
             </div>
           </form>
         </mat-step>
 
-
-
-
-        <mat-step [stepControl]="secondFormGroup">
-          <form [formGroup]="secondFormGroup">
-            <ng-template matStepLabel>開始日期 - 截止日期</ng-template>
-
-            <div class="field">
-              <p class="control has-icons-left has-icons-right">
-                <input class="input" type="date" placeholder="starttime" />
-                <span class="icon is-small is-left">
-                  <i class='bx bxs-hourglass-top'></i>
-                </span>
-                <span class="icon is-small is-right">
-                  <i class='bx bx-check'></i>
-                </span>
-              </p>
-            </div>
-            <div class="field">
-              <p class="control has-icons-left has-icons-right">
-                <input class="input" type="date" placeholder="endtime" />
-                <span class="icon is-small is-left">
-                  <i class='bx bxs-hourglass-bottom' ></i>
-                </span>
-                <span class="icon is-small is-right">
-                  <i class='bx bx-check'></i>
-                </span>
-              </p>
-            </div>
-
-            <div>
-              <button mat-button matStepperPrevious>Back</button>
-              <button mat-button matStepperNext>Next</button>
-            </div>
-          </form>
-        </mat-step>
         <mat-step>
           <ng-template matStepLabel>完成</ng-template>
           確認後，請往下一步
@@ -157,9 +126,9 @@
             <button mat-button routerLink="/adding">Next</button>
           </div>
         </mat-step>
-      </mat-vertical-stepper>
-
+      </mat-stepper>
     </div>
+
   }
 
 </div>

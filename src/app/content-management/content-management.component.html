@@ -1,5 +1,5 @@
-<!-- 頭部導航欄 -->
-<section class="hero is-small is-primary">
+
+<!-- <section class="hero is-small is-primary">
     <div class="hero-body">
       <p class="title" routerLink="">Survey</p>
       <div class="buttons">
@@ -14,7 +14,7 @@
 
 <div class="body-box">
 
-  <!-- 側邊導航欖 -->
+
   <nav class="side-nav">
     <div class="item" routerLinkActive="active" >
       <button routerLink="/management/edit">
@@ -38,7 +38,7 @@
     </div>
   </nav>
 
-  <!-- 右邊畫面 -->
+
     <div class="directions">
 
         <router-outlet></router-outlet>
@@ -46,8 +46,72 @@
 
 
     </div>
+</div> -->
+
+<body>
+<div class="container">
+  <!-- 側邊欖 -->
+  <nav class="leftSide">
+    <div class="memberInfo">
+      <img src="user.png">
+      <span>帳號</span>
+    </div>
+    <div class="functionZone">
+      <div class="functionBox">
+        <p class="subtitle">DASHBOARDS</p>
+        <div class="item" routerLinkActive="active" >
+          <button routerLink="/management/edit" (click)="showRouterTitle(1)">
+            <i class='bx bxs-edit' ></i>
+            我的問卷</button>
+        </div>
+        <div class="item" routerLinkActive="active" >
+          <button routerLink="/management/feedback" (click)="showRouterTitle(2)">
+            <i class='bx bx-message-dots' ></i>
+            問卷回饋</button>
+        </div>
+        <div class="item" routerLinkActive="active" >
+          <button routerLink="/management/count" (click)="showRouterTitle(3)">
+            <i class='bx bx-line-chart' ></i>
+            問卷統計</button>
+        </div>
+      </div>
+      <div class="functionBox">
+        <p class="subtitle">SETTINGS</p>
+        <div class="item" routerLinkActive="active" >
+          <button routerLink="/management/member" (click)="showRouterTitle(4)">
+            <i class='bx bx-user-plus'></i>
+            會員管理</button>
+        </div>
+      </div>
+      <p class="title" routerLink="/" style="
+        cursor: pointer;
+        margin-top: 43vh;
+        margin-left: -1vw;
+        text-align: center;
+        font-size: 45px;
+        color: rgb(102, 209, 255);
+      ">Survey</p>
+    </div>
+  </nav>
+
+  <!-- 頂部框 -->
+  <div class="topSide">
+    <div class="routerBox">
+      <i class='bx bx-home' routerLink="/management/welcome" (click)="showRouterTitle(0)"></i>
+      <span class="subtitle">Backend&nbsp;&nbsp;&nbsp;&nbsp;/
+
+        <span style="color: rgb(167, 229, 255);">{{functionTitle}}</span>
+      </span>
+
+    </div>
+    <i class='bx bx-moon'></i>
+  </div>
+
+  <!-- 主體內容 -->
+  <div class="mainContent">
+    <router-outlet></router-outlet>
+  </div>
+
 </div>
 
-
-
-
+</body>

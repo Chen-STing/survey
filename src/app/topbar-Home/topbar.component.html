@@ -30,14 +30,14 @@
         </div>
 
       <div class="hero-body">
- 
+
         <div class="wrapper">
           <input type="checkbox" id="toogle" class="hidden-trigger">
           <label for="toogle" class="circle">
             <span class="title">Survey</span>
           </label>
-          
-          
+
+
           <div class="subs">
             @for (question of questionData; track $index) {
               <button class="sub-circle" (mouseenter)="showShadow()" (mouseleave)="closeShadow()" routerLink="/questionnaire">
@@ -81,10 +81,10 @@
         </div>
         <footer class="card-footer">
           <p class="card-footer-item">
-            <input type="date">
+            <nz-date-picker nzBorderless nzPlaceHolder="請輸入開始日期" style="color: aliceblue;"></nz-date-picker>
           </p>
           <p class="card-footer-item">
-            <input type="date">
+            <nz-date-picker nzBorderless nzPlaceHolder="請輸入結束日期"></nz-date-picker>
           </p>
         </footer>
       </div>

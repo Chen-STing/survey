@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { BackDirectionsComponent } from './back-directions/back-directions.component';
 
 
+
 @Component({
   selector: 'app-content-management',
   standalone: true,
@@ -17,7 +18,8 @@ import { BackDirectionsComponent } from './back-directions/back-directions.compo
     EditContentComponent,
     FeedbackComponent,
     CommonModule,
-    BackDirectionsComponent],
+    BackDirectionsComponent,
+    ],
   templateUrl: './content-management.component.html',
   styleUrl: './content-management.component.scss'
 })
@@ -25,7 +27,27 @@ export class ContentManagementComponent {
 
   isTrue: boolean = false;
 
- 
+  functionTitle: string = "";
+
+  showRouterTitle(e: number) {
+    switch(e) {
+      case 1:
+        this.functionTitle = "我的問卷";
+        break;
+      case 2:
+        this.functionTitle = "問卷回饋";
+        break;
+      case 3:
+        this.functionTitle = "問卷統計";
+        break;
+      case 4:
+        this.functionTitle = "會員管理";
+        break;
+      default:
+        this.functionTitle = "";
+    }
+  }
+
 
 
 }

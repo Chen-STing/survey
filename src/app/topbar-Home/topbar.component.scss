@@ -29,16 +29,19 @@ p {
 // 彈出搜尋框
 
 .card {
-    background: rgb(56, 95, 221);
+    background: rgba(18, 22, 228, 0.7);
     position: absolute;
     top: 10%;
     left: 25%;
     width: 50%;
     z-index: 2;
+    .subtitle {
+      color: #848484;
+    }
 }
 
 .card-footer {
-    background: rgb(46, 46, 203);
+    background: rgba(0, 86, 224);
 }
 
 
