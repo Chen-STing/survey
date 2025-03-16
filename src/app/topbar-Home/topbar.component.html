@@ -29,25 +29,40 @@
           </nav>
         </div>
 
-        <div class="hero-body">
-          <div class="container has-text-centered">
-            <!-- 問卷所在 -->
-            <div class="survey-card-container">
-              @for (question of questionData; track $index) {
-                <div class="survey-card" (mouseenter)="showShadow()" (mouseleave)="closeShadow()" routerLink="/questionnaire">
-                  <p>id: {{question.id}}</p>
-                  <div class="question-title-box">
-                    <h2>{{question.title}}</h2>
-                  </div>
-                  <p style="font-size: 14px;">截止日期： {{question.endTime}}</p>
-                </div>
-              }
-            </div>
-            <!-- 中央文字 -->
-                <p class="title">Survey</p>
-                <p class="subtitle">Subtitle</p>
-              </div>
+      <div class="hero-body">
+ 
+        <div class="wrapper">
+          <input type="checkbox" id="toogle" class="hidden-trigger">
+          <label for="toogle" class="circle">
+            <span class="title">Survey</span>
+          </label>
+          
+          
+          <div class="subs">
+            @for (question of questionData; track $index) {
+              <button class="sub-circle" (mouseenter)="showShadow()" (mouseleave)="closeShadow()" routerLink="/questionnaire">
+                <input value="1" name="sub-circle" type="radio" id="sub{{$index + 1}}" class="hidden-sub-trigger">
+                <p style="
+                  background: rgb(17, 126, 242);
+                  color: rgb(118, 248, 31);
+                ">id: {{question.id}}</p>
+                <label class="question-title-box" for="sub{{$index + 1}}">
+                  <h2>{{question.title}}</h2>
+                  <p style="
+                  color: rgb(66, 55, 55);
+                  font-size: 14px;
+                  position: absolute;
+                  left: 12%;
+                  bottom: 8%;
+                  ">截止日期： {{question.endTime}}</p>
+                </label>
+              </button>
+            }
+          </div>
         </div>
+
+
+      </div>
     </section>
 
     <!-- 彈出搜尋視窗 -->
