@@ -11,17 +11,19 @@
             <form action="">
                 <h1>登入會員</h1>
                 <div class="input-box">
-                    <input type="text" placeholder="Username">
+                    <input type="text" placeholder="Username" #loginUser id="loginUser">
                     <i class='bx bxs-user'></i>
+                    
                 </div>
                 <div class="input-box">
-                    <input type="password" placeholder="Password">
+                    <input type="password" #loginPassword placeholder="Password" pattern="[a-zA-Z0-9]{6,}" required>
                     <i class='bx bxs-lock-alt'></i>
+                    
                 </div>
                 <div class="forget-link">
-                    <a href="#">忘記密碼?</a>
+                    <p class="error" style="text-align: left;">&nbsp;</p>
                 </div>
-                <button type="submit" class="btn" routerLink="/management/welcome">登入</button>
+                <button class="btn" (click)="submitValid()" routerLink="/management/welcome">登入</button>
                 <div class="social-icons">
                     <a href="#"><i class='bx bxl-facebook-circle'></i></a>
                     <a href="#"><i class='bx bxl-google'></i></a>
@@ -34,18 +36,21 @@
             <form action="">
                 <h1>註冊會員</h1>
                 <div class="input-box">
-                    <input type="text" placeholder="Username">
+                    <input type="text" placeholder="Username" (input)="registerInput(0)" required>
                     <i class='bx bxs-user'></i>
+                    <p class="error" style="text-align: left;"></p>
                 </div>
                 <div class="input-box">
-                    <input type="email" placeholder="Email">
+                    <input type="email" name="email" placeholder="Email" [(ngModel)]="regEmailValue" (input)="registerInput(1)" pattern="\S[a-z0-9_\.]*@[a-z0-9]+\.com[a-z0-9]*" required>
                     <i class='bx bxs-envelope'></i>
+                    <p class="error" style="text-align: left;"></p>
                 </div>
                 <div class="input-box">
-                    <input type="password" placeholder="Password">
+                    <input type="password" name="password" placeholder="Password" (input)="registerInput(2)"  pattern="[a-zA-Z0-9]{6,}" required>
                     <i class='bx bxs-lock-alt'></i>
+                    <p class="error" style="text-align: left;"></p>
                 </div>
-                <button type="submit" class="btn">註冊</button>
+                <button type="submit" class="btn registerBtn">註冊</button>
                 <div class="social-icons">
                     <a href="#"><i class='bx bxl-facebook-circle'></i></a>
                     <a href="#"><i class='bx bxl-google'></i></a>
@@ -58,13 +63,13 @@
             <div class="toggle-panel toggle-left">
                 <h1>Hello, Welcome!</h1>
                 <p>Don't have an account?</p>
-                <button (click)="isBoolean = !isBoolean" class="btn register-btn">註冊會員</button>
+                <button (click)="toggleBtn()" class="btn register-btn">註冊會員</button>
             </div>
 
             <div class="toggle-panel toggle-right">
                 <h1>Welcome Back!</h1>
                 <p>Already have an account?</p>
-                <button (click)="isBoolean = !isBoolean" class="btn login-btn">登入會員</button>
+                <button (click)="toggleBtn()" class="btn login-btn">登入會員</button>
             </div>
         </div>
 

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { ExampleService } from '../../@services/example.service';
 
 @Component({
   selector: 'app-back-directions',
@@ -11,5 +12,9 @@ import { CommonModule } from '@angular/common';
   styleUrl: './back-directions.component.scss'
 })
 export class BackDirectionsComponent {
-
+  constructor(private exampleService: ExampleService) {}
+  ngOnInit() {
+    console.log(this.exampleService.user);
+    
+  }
 }
