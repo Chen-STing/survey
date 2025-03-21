@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
+import { DateService } from '../@services/date.service';
 
 
 @Component({
@@ -15,10 +16,17 @@ export class TopbarComponent {
 
   isBoolean: boolean = false;
   inputData: string = '';
-
+  minDate!: string;
 
   newStyle: HTMLStyleElement = document.createElement('style');
 
+  constructor(
+    private dateService: DateService,
+  ) {}
+
+  ngOnInit() :void{
+    this.minDate = this.dateService.changeDateFormat(new Date());
+  }
 
 
   showShadow() {

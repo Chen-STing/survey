@@ -136,6 +136,7 @@ form {
 .social-icons {
     display: flex;
     justify-content: center;
+    margin-top: -25px;
 }
 
 .social-icons a {
@@ -215,3 +216,46 @@ form {
     border: 2px solid #fff;
     box-shadow: none;
 }
+
+// 驗證功能
+.login {
+    input:invalid:not(:placeholder-shown) {
+        border: 3px solid red;
+        background-image: url(/check_wrong.png);
+        background-size: 22px;
+        background-repeat: no-repeat;
+        background-position: calc(100% - 17px);
+        // 下一個兄弟標籤生效
+        + .bx {
+            display: none;
+        }
+
+        ~ p {
+            color: red;
+        }
+    }
+}
+
+.register {
+    input:invalid:not(:placeholder-shown) {
+        border: 3px solid red;
+        background-image: url(/check_wrong.png);
+        background-size: 22px;
+        background-repeat: no-repeat;
+        background-position: calc(100% - 17px);
+        // 下一個兄弟標籤生效
+        + .bx {
+            display: none;
+        }
+
+        ~ p {
+            color: red;
+        }
+
+    }
+}
+
+.error {
+    margin-bottom: -7px;
+}
+

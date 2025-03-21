@@ -8,6 +8,8 @@ import { RouterLink } from '@angular/router';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzTableModule,NzTableFilterFn,NzTableFilterList, NzTableSortFn } from 'ng-zorro-antd/table';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
+import { NzCheckboxModule, NzCheckboxOption } from 'ng-zorro-antd/checkbox';
 
 
 
@@ -24,7 +26,9 @@ import { NzTableModule,NzTableFilterFn,NzTableFilterList, NzTableSortFn } from '
     RouterLink,
     DragDropModule,
     NzDatePickerModule,
-    NzTableModule
+    NzTableModule,
+    NzCheckboxModule, 
+    NzDividerModule
   ],
   templateUrl: './edit-content.component.html',
   styleUrl: './edit-content.component.scss',
@@ -46,7 +50,6 @@ export class EditContentComponent{
   }
 
 
-
   // 模板內容
   private _formBuilder = inject(FormBuilder);
 
@@ -55,13 +58,6 @@ export class EditContentComponent{
 
 
   date: string= "";
-
-  ngOnInit(): void {
-    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-    //Add 'implements OnInit' to the class.
-
-
-  }
 
   isTrue: boolean = false;
 
