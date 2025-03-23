@@ -49,7 +49,7 @@
 </div> -->
 
 <body>
-<div class="container">
+<div class="container" [ngClass]="{dark: !isdarkMode, light: isdarkMode}">
   <!-- 側邊欖 -->
   <nav class="leftSide">
     <div class="memberInfo">
@@ -89,7 +89,7 @@
         margin-left: -1vw;
         text-align: center;
         font-size: 45px;
-        color: rgb(102, 209, 255);
+        color: rgb(38, 136, 178);
       ">Survey</p>
     </div>
   </nav>
@@ -100,16 +100,17 @@
       <i class='bx bx-home' routerLink="/management/welcome" (click)="showRouterTitle(0)"></i>
       <span class="subtitle">Backend&nbsp;&nbsp;&nbsp;&nbsp;/
 
-        <span style="color: rgb(167, 229, 255);">{{functionTitle}}</span>
+        <span class="routerTitle">{{functionTitle}}</span>
       </span>
 
     </div>
-    <i class='bx bx-moon'></i>
+    <i class='bx bx-moon' (click)="isdarkMode = !isdarkMode"></i>
   </div>
 
   <!-- 主體內容 -->
   <div class="mainContent">
     <router-outlet></router-outlet>
+
   </div>
 
 </div>

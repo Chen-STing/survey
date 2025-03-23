@@ -1,8 +1,27 @@
+.light {
+  --background-primary: #ccedf1;
+  --tableHeader-color: #0cbefa;
+  --tableTbody-color: #4577ec;
+  --tableOddTbody-color: #15d4ca;
+  --textTitle-color: #eee1ff;
+  --text-color: rgb(34, 23, 3);
+}
+
+.dark {
+  --background-primary: #252931;
+  --tableHeader-color: #0382ad;
+  --tableTbody-color: #30557d;
+  --tableOddTbody-color: #2c514d;
+  --textTitle-color: rgb(241, 255, 254);
+  --text-color: rgb(254, 214, 198);
+}
+
+// 整體布局
 .containerFeed {
   width: 95%;
   height: auto;
   border-radius: 15px;
-  background: #252931;
+  background: var(--background-primary);
   padding: 15px;
   margin-top: 30px;
   margin-left: 30px;
@@ -11,7 +30,7 @@
 .survey-select {
   width: 20%;
   padding-left: 15px;
-  background: rgba(127, 226, 223, 0.6);
+  background: rgba(109, 218, 255, 0.89);
   line-height: 40px;
   margin-bottom: 20px;
   border-radius: 10px;
@@ -23,7 +42,10 @@
   border-radius: 10px;
 
   thead{
-    background: rgba(82, 229, 82, 0.7);
+    background: var(--tableHeader-color);
+    th {
+      color: var(--textTitle-color);
+    }
     th:nth-child(1) {
       border-radius: 10px 0px 0px 0px;
     }
@@ -37,10 +59,13 @@
 .table-main tbody{
   td,
   th {
-    color: rgb(140, 172, 200);
+    color: var(--text-color)
+  }
+  tr:nth-child(even) {
+    background: var(--tableTbody-color);
   }
   tr:nth-child(odd) {
-    background: #13316c;
+    background: var(--tableOddTbody-color);
   }
 
 }
@@ -65,10 +90,11 @@
 // 問卷按鈕
 .survey-btn {
   width: 5rem;
-  border: 3px groove rgba(21, 154, 187, 0.60);
+  border: 3px groove rgb(253, 253, 253);
   border-radius: 15px;
 }
 
 .survey-btn:hover {
-  background-color: rgba(21, 154, 187);
+  background-color: rgb(41, 4, 31);
+  color: #eee1ff
 }

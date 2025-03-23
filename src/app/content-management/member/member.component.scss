@@ -1,20 +1,43 @@
+.light {
+  --background-primary: rgb(255, 255, 255);
+  --textTitle-color: rgb(43, 64, 96);
+  --text-color: rgb(44, 58, 58);
+  --background-border: rgb(226, 229, 238);
+}
+
+.dark {
+  --background-primary: rgb(49, 75, 96);
+  --textTitle-color: rgb(139, 240, 235);
+  --text-color: rgb(158, 182, 182);
+  --submit-color:white;
+  --background-border: rgb(43, 44, 44);
+}
+
 .containerMember {
   width: 95%;
   height: auto;
   border-radius: 15px;
-  background: #252931;
+  background: var(--background-border);
   padding: 15px;
   margin-top: 30px;
   margin-left: 30px;
 }
 
+.card{
+  background: var(--background-primary);
+
+  .title {
+    color: var(--textTitle-color);
+  }
+
+  .input {
+    width: 70%;
+  }
+}
+
 .title-box {
   text-align: center;
   margin-bottom: 35px;
-}
-
-.card-content input{
-  width: 70%;
 }
 
 .password-box {
@@ -23,11 +46,15 @@
 }
 
 .password-box p {
-  color: rgba(246, 100, 100, 0.7);
+  color: var(--text-color);
 }
 
 .card-footer {
   background: rgba(164, 164, 230, 0.7);
+
+  p {
+    color: var(--submit-color);
+  }
 
 }
 

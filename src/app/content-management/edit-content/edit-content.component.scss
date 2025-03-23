@@ -3,13 +3,31 @@
   margin: 0;
 }
 
+.light {
+  --background-primary: #f3e3fb;
+  --tableHeader-color: #8d6efe;
+  --tableTbody-color: #885bd6;
+  --tableOddTbody-color: #b388ee;
+  --textTitle-color: #eee1ff;
+  --text-color: rgb(34, 23, 3);
+}
+
+.dark {
+  --background-primary: #252931;
+  --tableHeader-color: #3a499cea;
+  --tableTbody-color: #5e6ec9;
+  --tableOddTbody-color: #3aa5ac76;
+  --textTitle-color: rgb(5, 169, 211);
+  --text-color: rgb(254, 214, 198);
+}
+
 // 布局大小
 
 .containerEdit {
   width: 95%;
   height: auto;
   border-radius: 15px;
-  background: #252931;
+  background: var(--background-primary);
   padding: 15px;
   margin-top: 20px;
   margin-left: 30px;
@@ -137,11 +155,11 @@
 // 表格本體
 nz-table {
   tbody {
-    background: #5e6ec9;
+    background: var(--tableTbody-color);
   }
   th {
-    background: #3a499cea;
-    color: rgb(5, 169, 211);
+    background: var(--tableHeader-color);
+    color: var(--textTitle-color);
     font-size: 18px;
   }
   // 勾選框
@@ -165,7 +183,7 @@ nz-table {
     width: 15%;
   }
   tr:nth-child(odd) {
-    background: #3aa5ac76;
+    background: var(--tableOddTbody-color);
   }
   td span {
     width: 50px;
@@ -182,10 +200,31 @@ nz-table {
   width: 30%;
   border-radius: 20px;
   z-index: 100;
+  button {
+    background: #5e6ec9;
+    margin: 10px;
+    border-radius: 10px;
+    padding: 5px;
+    color: #eee1ff;
+  }
+  button:hover {
+    opacity: 0.7;
+    color: #010917;
+  }
 }
 
 .message-header {
-  padding: 5px;
+  padding: 2px;
+  padding-left: 15px;
   font-size: 1.2rem;
+}
+
+.title {
+  font-size: 1.5rem;
+  color: #5e6ec9;
+}
+
+.control:nth-child(2) {
+  margin-top: 15px;
 }
 

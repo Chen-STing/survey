@@ -3,16 +3,12 @@
   margin: 0 auto;
 }
 
-.mat-stepper-horizontal {
-    margin-top: 8px;
-  }
-
-  .mat-mdc-form-field {
-    margin-top: 16px;
-  }
+body {
+  overflow: hidden;
+}
 
 .card {
-  margin-top: 5rem;
+  margin-top: 10rem;
   width: 80%;
 }
 
@@ -67,6 +63,12 @@
 
 
 // 問卷選項
+.containerQuest {
+  margin-top: 1rem;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
+
 .question-box {
   position: relative;
   margin-top: 5rem;
@@ -131,22 +133,32 @@
   color: rgb(214, 131, 131);
 }
 
-
-.question-box button {
-  font-size: 1.3rem;
-  position: absolute;
-  bottom: 0;
-  right: 0;
-}
-
-
-// 切換按鈕
-.active {
+// 內容隱藏
+.hide {
   display: none;
 }
 
-// 返回前頁按鈕
-#backBtn {
-  font-size: 1.5rem;
-  margin-left: 1rem;
+.warning {
+  position: absolute;
+  left: 40%;
+  font-size: 2rem;
+  color: red;
 }
+// 控制按鈕
+.steps-action {
+  position: relative;
+  display: grid;
+  grid-template-columns: 100px 1fr 100px 100px;
+  button {
+    margin-top: 140px;
+    width: 4rem;
+    height: 2rem;
+  }
+
+  button:nth-child(1) {
+    background: rgb(73, 166, 212);
+  }
+}
+
+
+

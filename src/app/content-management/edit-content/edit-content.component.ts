@@ -1,15 +1,17 @@
-import {Component, inject} from '@angular/core';
-import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {MatButtonModule} from '@angular/material/button';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatStepperModule} from '@angular/material/stepper';
+import { Component, inject} from '@angular/core';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { MatButtonModule} from '@angular/material/button';
+import { MatInputModule} from '@angular/material/input';
+import { MatFormFieldModule} from '@angular/material/form-field';
+import { MatStepperModule} from '@angular/material/stepper';
 import { RouterLink } from '@angular/router';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzTableModule,NzTableFilterFn,NzTableFilterList, NzTableSortFn } from 'ng-zorro-antd/table';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzCheckboxModule, NzCheckboxOption } from 'ng-zorro-antd/checkbox';
+import { ExampleService } from '../../@services/example.service';
+import { CommonModule } from '@angular/common';
 
 
 
@@ -27,8 +29,9 @@ import { NzCheckboxModule, NzCheckboxOption } from 'ng-zorro-antd/checkbox';
     DragDropModule,
     NzDatePickerModule,
     NzTableModule,
-    NzCheckboxModule, 
-    NzDividerModule
+    NzCheckboxModule,
+    NzDividerModule,
+    CommonModule
   ],
   templateUrl: './edit-content.component.html',
   styleUrl: './edit-content.component.scss',
@@ -37,6 +40,19 @@ import { NzCheckboxModule, NzCheckboxOption } from 'ng-zorro-antd/checkbox';
 
 
 export class EditContentComponent{
+
+constructor(
+  private exampleService: ExampleService,
+) {};
+
+isdarkMode!: boolean;
+
+ngDoCheck(): void {
+  //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+  //Add 'implements OnInit' to the class.
+  this.isdarkMode = this.exampleService.isdarkMode;
+
+}
 
   // 獲取 問卷名稱及內容
   getFormValueFirst() {

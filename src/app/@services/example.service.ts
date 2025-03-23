@@ -8,5 +8,7 @@ export class ExampleService {
   user!: string;
   password!: string;
 
+  isdarkMode!: boolean;
+
   constructor() { }
 }

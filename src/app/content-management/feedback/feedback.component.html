@@ -1,5 +1,5 @@
 
-  <div class="containerFeed">
+  <div class="containerFeed" [ngClass]="{dark: !isdarkMode, light: isdarkMode}">
     <div class="survey-select">
       <label for="">選擇問卷：</label>
       <div class="select is-success">

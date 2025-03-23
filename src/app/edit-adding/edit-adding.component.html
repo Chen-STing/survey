@@ -11,28 +11,28 @@
   <div class="functionZone">
 
 
-    
+
     <div class="menu">
-      <div class="link" (click)="selectQuestStat(1)">
+      <div class="link" (click)="addQuiz(1)">
           <p class="add-quest-option link-icon">
             <i class='bx bx-radio-circle-marked'></i>
           </p>
         <span class="link-title">單選題</span>
       </div>
-      <div class="link" (click)="selectQuestStat(2)">
+      <div class="link" (click)="addQuiz(2)">
         <p class="add-quest-option link-icon">
           <i class='bx bx-check-square'></i>
         </p>
         <span class="link-title">多選題</span>
       </div>
-      <div class="link"  (click)="selectQuestStat(3)">
+      <div class="link"  (click)="addQuiz(3)">
         <p class="add-quest-option link-icon">
           <i class='bx bx-notepad'></i>
         </p>
         <span class="link-title">文字題</span>
       </div>
 
-      <div class="link" (click)="selectQuestStat(4)">
+      <div class="link" (click)="addQuiz(4)">
         <p class="add-quest-option link-icon">
           <i class='bx bx-star' ></i>
         </p>
@@ -42,79 +42,95 @@
     </div>
 
 
-
-
-
     <div class="outline">
-      大綱
+      <nz-divider style="
+        color: rgb(167, 11, 66);
+        font-size: 1.5rem;
+        border-color: rgb(99, 138, 8);"
+      nzText="大綱" nzVariant="dotted"></nz-divider>
+      <div class="main-point">
+        @for(quiz of quizArray; track $index) {
+          <p>{{$index + 1}}. {{quiz.state}}</p>
+        }
+      </div>
     </div>
   </div>
 
-
+ <div></div>
 <!-- 問卷主體 -->
   <div class="quest-main">
     <h1>問卷標題</h1>
     <p>問卷說明</p>
 
+    @for(quiz of quizArray; track $index; let TitIndex = $index) {
 
     <!-- 單選題 -->
-    @if (questStat == "R") {
+    @if (quiz.state == "單選題") {
       <div class="quest-box">
         <div class="radio-quest">
           <div id="radio-box">
-            <span>No. </span><input type="text"  class="input is-warning" placeholder="Title"><br>
-            <i class='bx bx-radio-circle'></i><input type="text" class="input is-warning" placeholder="問題選項"><i class='bx bx-no-entry'></i><br>
+            <span><span style="color: blue;font-size: 1.5rem;">{{TitIndex + 1}}.</span> {{quiz.state}} </span><input type="text" (change)="changeTitle(TitIndex)" value="{{quiz.title}}" class="input is-warning quiz-title" placeholder="問題標題"><br>
+            <div class="quiz{{TitIndex}}">
+
+            @for(option of quiz.option; track $index) {
+
+              <p><i class='bx bx-radio-circle'></i><input type="text" class="input is-warning quiz-option" value="{{option}}" (change)="changeOption(TitIndex, $index)" placeholder="問題選項"><i class='bx bx-no-entry' (click)="deleteQuizOption(TitIndex, $index)"></i></p>
+            }
+          </div>
           </div>
           <div class="selectZone">
-            <i class='bx bx-plus' (click)="createRadio()"></i>
-            <i class='bx bxs-trash-alt' ></i>
+            <i class='bx bx-plus' (click)="addOption(TitIndex)"></i>
+            <i class='bx bxs-trash-alt' (click)="deleteQuiz(TitIndex)"></i>
           </div>
         </div>
       </div>
     }
 
     <!-- 多選題 -->
-    @if (questStat == "C") {
+    @if (quiz.state == "多選題") {
       <div class="quest-box">
         <div class="checkbox-quest">
           <div id="check-box">
-            <span>No. </span><input type="text" class="input is-warning" placeholder="Title"><br>
-            <div class="check-option">
-              <i class='bx bx-checkbox'></i><input type="text" class="input is-warning" placeholder="問題選項"><i class='bx bx-no-entry' (click)="remove($event)"></i><br>
+            <span><span style="color: blue;font-size: 1.5rem;">{{TitIndex + 1}}.</span> {{quiz.state}} </span><input type="text" class="input is-warning quiz-title" (change)="changeTitle(TitIndex)" value="{{quiz.title}}" placeholder="問題標題"><br>
+            <div class="quiz{{TitIndex}}">
+              @for(option of quiz.option; track $index) {
+                <p><i class='bx bx-checkbox'></i><input type="text" class="input is-warning quiz-option" value="{{option}}" (change)="changeOption(TitIndex, $index)" placeholder="問題選項"><i class='bx bx-no-entry' (click)="deleteQuizOption(TitIndex, $index)"></i></p>
+              }
             </div>
-            <div class="check-option">
-              <i class='bx bx-checkbox'></i><input type="text" class="input is-warning" placeholder="問題選項"><i class='bx bx-no-entry'></i><br>
-            </div>
+
           </div>
           <div class="selectZone">
-            <i class='bx bx-plus' (click)="createCheck()"></i>
-            <i class='bx bxs-trash-alt' ></i>
+            <i class='bx bx-plus' (click)="addOption(TitIndex)"></i>
+            <i class='bx bxs-trash-alt' (click)="deleteQuiz(TitIndex)"></i>
           </div>
         </div>
       </div>
     }
 
-    <!-- 文本題 -->
-    @if (questStat == "T") {
+    <!-- 文字題 -->
+    @if (quiz.state == "文字題") {
       <div class="quest-box">
         <div class="text-quest">
-          <span>No. </span><input type="text" class="input is-warning" placeholder="Title"><br>
-          <textarea
-          class="textarea is-primary"
-          placeholder="請輸入內容"
-          ></textarea>
+          <span><span style="color: blue;font-size: 1.5rem;">{{TitIndex + 1}}.</span> {{quiz.state}} </span><input type="text" class="input is-warning quiz-title" (change)="changeTitle(TitIndex)" value="{{quiz.title}}" placeholder="問題標題"><br>
+          <div style="padding-left: 15%; padding-right: 15%;">
+            <textarea
+            class="textarea is-primary"
+            rows="2"
+            placeholder="文本框"
+            ></textarea>
+          </div>
           <div class="selectZone">
-            <i class='bx bxs-trash-alt' ></i>
+            <i class='bx bxs-trash-alt' (click)="deleteQuiz(TitIndex)"></i>
           </div>
         </div>
       </div>
     }
 
     <!-- 評量題 -->
-    @if (questStat == "A") {
+    @if (quiz.state == "評量題") {
       <div class="quest-box">
         <div class="Assessment-quest">
-          <span>No. </span><input type="text" class="input is-warning" placeholder="Title"><br>
+          <span><span style="color: blue;font-size: 1.5rem;">{{TitIndex + 1}}.</span> {{quiz.state}} </span><input type="text" class="input is-warning quiz-title" (change)="changeTitle(TitIndex)" value="{{quiz.title}}" placeholder="問題標題"><br>
           <div>
             <i class='bx bx-star' ></i>
             <i class='bx bx-star' ></i>
@@ -123,14 +139,15 @@
             <i class='bx bx-star' ></i>
           </div>
           <div class="selectZone">
-            <i class='bx bxs-trash-alt' ></i>
+            <i class='bx bxs-trash-alt' (click)="deleteQuiz(TitIndex)"></i>
           </div>
         </div>
       </div>
     }
 
-
+  }
   </div>
+
 
 
 
@@ -138,11 +155,19 @@
 
 
 <div class="save-push">
-  <button  class="button is-info is-rounded">
+
+
+  <nz-back-top [nzTemplate]="tpl" [nzVisibilityHeight]="100">
+    <ng-template #tpl>
+      <div class="ant-back-top-inner"><i class='bx bx-arrow-to-top' ></i></div>
+    </ng-template>
+  </nz-back-top>
+
+  <button  class="button is-info is-rounded" (click)="completeQuiz()">
     <i class='bx bxs-save' ></i>
     <span>儲存</span>
   </button>
-  <button  class="button is-info is-rounded">
+  <button  class="button is-info is-rounded" (click)="completeQuiz()">
     <i class='bx bx-navigation'></i>
     <span>發布</span>
   </button>

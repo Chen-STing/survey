@@ -1,13 +1,28 @@
 import { Component } from '@angular/core';
+import { ExampleService } from '../../@services/example.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-feedback',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './feedback.component.html',
   styleUrl: './feedback.component.scss'
 })
 export class FeedbackComponent {
+
+  constructor(
+      private exampleService: ExampleService,
+    ) {};
+
+    isdarkMode!: boolean;
+
+  ngDoCheck(): void {
+    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+    //Add 'implements OnInit' to the class.
+    this.isdarkMode = this.exampleService.isdarkMode;
+
+  }
 
   questionData: Array<any> = [
     {
