@@ -1,4 +1,3 @@
-import { log } from 'ng-zorro-antd/core/logger';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
@@ -7,8 +6,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzStepsModule } from 'ng-zorro-antd/steps';
+import { ExampleService } from '../@services/example.service';
 
 @Component({
   selector: 'app-questionnaire',
@@ -32,16 +31,95 @@ export class QuestionnaireComponent {
   current: number = 0;
   showPage: number = 3;
   starCountSave: number = 0;
+  list: Array<any> = [];
 
-  collectionUser: Array<any> = [];
+  collectionUser = {
+    title: "",
+    userName: "",
+    userAge: 0,
+    userGender: "",
+    questions: this.list
+  };
 
   isTrue: boolean = false;
 
   toggle () {
-
+    this.keyUesrData();
     this.isTrue = !this.isTrue;
   }
 
+  constructor(private exampleService: ExampleService) {}
+
+  // 收集受訪者資料
+  keyUesrData() {
+    let user = document.querySelectorAll(".user-item input");
+    let gender = document.querySelectorAll(".user-item input:checked")
+
+    if(gender.length == 0) {
+      return;
+    }
+
+    this.collectionUser.title = "木柵動物園裡，請挑選出你最喜歡動物的前三名，並且說明一下原因";
+    this.collectionUser.userName = (user[0] as HTMLInputElement).value;
+    this.collectionUser.userAge = Number((user[1] as HTMLInputElement).value);
+    this.collectionUser.userGender = (gender[0] as HTMLInputElement).value;
+
+  }
+  // 收集受訪者回答資料
+  keyCollectionUser() {
+
+    for(let i = this.current; i <= this.current; i++) {
+      let quiz = document.querySelectorAll(".quiz" + i + ":checked");
+      let text = document.querySelector(".box" + i + " textarea") as HTMLTextAreaElement;
+
+      switch(this.arrayData[i].questState) {
+        case "單選題":
+          let tempEleR = quiz[quiz.length - 1] as HTMLInputElement;
+          let userDataR = {
+            questionTitle: this.arrayData[i].title,
+            response: tempEleR.value
+          }
+
+          this.collectionUser.questions.push(userDataR);
+
+          break;
+        case "多選題":
+          let checklist = [];
+          for(let check = 0; check < quiz.length; check++) {
+            checklist.push((quiz[check]as HTMLInputElement).value)
+          }
+          let userDataC = {
+            questionTitle: this.arrayData[i].title,
+
+            responseList: checklist
+          }
+          this.collectionUser.questions.push(userDataC);
+
+
+          break;
+        case "文字題":
+          let userDataT = {
+            questionTitle: this.arrayData[i].title,
+
+            response: text.value
+          }
+          this.collectionUser.questions.push(userDataT);
+
+          break;
+        case "評量題":
+          let userDataS = {
+            questionTitle: this.arrayData[i].title,
+
+            star: this.starCountSave
+          }
+          this.collectionUser.questions.push(userDataS);
+          this.starCountSave = 0;
+
+      }
+    }
+
+
+  }
 
 
   // 評量
@@ -64,11 +142,11 @@ export class QuestionnaireComponent {
     }
 
     this.starCountSave = Number(starCount);
+
   }
 
   pre(): void {
-    this.collectionUser.splice(this.current - 1, 1);
-    console.log(this.collectionUser);
+    this.collectionUser.questions.splice(this.current - 1, 1);
 
 
     let stepDiv = document.querySelectorAll("nz-step");
@@ -94,11 +172,11 @@ export class QuestionnaireComponent {
 
     for(let i = this.current; i <= this.current; i++) {
       let quiz = document.querySelectorAll(".quiz" + i + ":checked");
-      let text = document.querySelector(".quiz" + i);
+      let text = document.querySelector(".box" + i + " textarea") as HTMLTextAreaElement;
       // token判斷能否通行
       let token = quiz.length;
 
-      if((text as HTMLInputElement).value) {
+      if(text?.value) {
         token = 1;
       }
 
@@ -111,51 +189,7 @@ export class QuestionnaireComponent {
         (document.querySelector(".nextSubmit") as HTMLButtonElement).disabled = true;
         return;
       }
-
-      switch(this.arrayData[i].questState) {
-        case "單選題":
-          let tempEleR = quiz[quiz.length - 1] as HTMLInputElement;
-          let userDataR = {
-            title: this.arrayData[i].title,
-            questState: "單選題",
-            answer: tempEleR.value
-          }
-          this.collectionUser.push(userDataR);
-          console.log(this.collectionUser);
-          break;
-        case "多選題":
-          let checklist = [];
-          for(let check = 0; check < quiz.length; check++) {
-            checklist.push((quiz[check]as HTMLInputElement).value)
-          }
-          let userDataC = {
-            title: this.arrayData[i].title,
-            questState: "多選題",
-            answerList: checklist
-          }
-          this.collectionUser.push(userDataC);
-
-          console.log(this.collectionUser);
-          break;
-        case "文字題":
-          let userDataT = {
-            title: this.arrayData[i].title,
-            questState: "文字題",
-            answer: (text as HTMLInputElement).value
-          }
-          this.collectionUser.push(userDataT);
-          console.log(this.collectionUser);
-          break;
-        case "評量題":
-          let userDataS = {
-            title: this.arrayData[i].title,
-            questState: "評量題",
-            answer: this.starCountSave
-          }
-          this.collectionUser.push(userDataS);
-          this.starCountSave = 0;
-          console.log(this.collectionUser);
-      }
+      this.keyCollectionUser();
     }
 
       // 進行下一頁或提交
@@ -171,11 +205,14 @@ export class QuestionnaireComponent {
       content[this.current].classList.remove("hide");
       content[this.current - 1].classList.add("hide");
 
-
   }
 
   done(): void {
-    console.log('done');
+    this.keyCollectionUser();
+
+    this.exampleService.collectionUser = this.collectionUser;
+    console.log(this.collectionUser);
+
   }
 
   call(): void {
@@ -193,9 +230,7 @@ export class QuestionnaireComponent {
     }
   }
 
-  // getText() {
 
-  // }
 
   arrayData: Array<any> = [
     {
@@ -239,22 +274,23 @@ export class QuestionnaireComponent {
       id: 4,
       title: "您推薦木柵動物園嗎？ 推薦指數：",
       questState: "評量題",
-    },
-    {
-      id: 5,
-      title: "您推薦木柵動物園嗎？ 推薦指數：",
-      questState: "評量題",
-    },
-    {
-      id: 6,
-      title: "說明你想成為動物的原因",
-      questState: "文字題"
-    },
-    {
-      id: 6,
-      title: "說明你想成為動物的原因",
-      questState: "文字題"
     }
   ];
 
+}
+
+
+interface questObj {
+  title: string;
+  userName: string;
+  userAge: number;
+  userGender: string;
+  questions: questions[];
+}
+
+interface questions {
+  questionTitle: string;
+  response?: string;
+  responseList?: string[];
+  star?: number;
 }

@@ -27,8 +27,8 @@
           </div>
           <div class="user-item">
             <label for="">性別：</label>
-            <input type="radio" name="gender">男
-            <input type="radio" name="gender">女
+            <input type="radio" name="gender" value="男">男
+            <input type="radio" name="gender" value="女">女
           </div>
         </div>
 
@@ -69,10 +69,11 @@
           <div class="question-box" [ngClass]="{hide: $index > 0}">
             <h1>{{data.title}}</h1>
 
-            <div class="option-box control">
+            <div class="option control">
 
               <!-- 單選題 -->
               @if (data.questState == "單選題") {
+                <div class="box{{quizIndex}} option-box" style="width: vw;">
                 @for (option of data.option; track $index) {
                   <label class="radio">
                     <input class="quiz{{quizIndex}}" (click)="call()" type="radio" name="{{quizIndex}}" value="{{data.option[$index]}}" required="required">
@@ -90,10 +91,12 @@
                     <label class="radio"></label>
                   }
                 }
+                </div>
               }
 
                 <!-- 多選題 -->
                 @if (data.questState == "多選題") {
+                  <div class="box{{quizIndex}}  option-box">
                   @for (option of data.option; track $index) {
                     <label class="checkbox">
                       <input class="quiz{{quizIndex}}" (click)="call()" type="checkbox" name="{{quizIndex}}" value="{{data.option[$index]}}" required="required">
@@ -117,13 +120,14 @@
                       <label class="checkbox"></label>
                     }
                   }
+                  </div>
                 }
 
                 <!-- 文字題 -->
                 @if (data.questState == "文字題") {
-                  <div style="width: 80%;margin-top: 50px;">
+                  <div style="width: 80%;margin-top: 50px;" class="box{{quizIndex}}  option-box">
                     <textarea
-                      class=" textarea quiz{{quizIndex}}"
+                      class=" textarea"
                       placeholder="請回答問題"
                       rows="10"
                       required="required"
@@ -134,12 +138,12 @@
 
                 <!-- 評量題 -->
                 @if (data.questState == "評量題") {
-                  <div class="option-star quiz{{quizIndex}}">
-                    <i class='bx bxs-star' id="{{$index}}-1" (click)="selectStar($event, $index)"></i>
-                    <i class='bx bxs-star' id="{{$index}}-2" (click)="selectStar($event, $index)"></i>
-                    <i class='bx bxs-star' id="{{$index}}-3" (click)="selectStar($event, $index)"></i>
-                    <i class='bx bxs-star' id="{{$index}}-4" (click)="selectStar($event, $index)"></i>
-                    <i class='bx bxs-star' id="{{$index}}-5" (click)="selectStar($event, $index)"></i>
+                  <div class="option-star box{{quizIndex}}">
+                    <i class='bx bxs-star' id="{{$index}}-1" (click)="call()" (click)="selectStar($event, $index)"></i>
+                    <i class='bx bxs-star' id="{{$index}}-2" (click)="call()" (click)="selectStar($event, $index)"></i>
+                    <i class='bx bxs-star' id="{{$index}}-3" (click)="call()" (click)="selectStar($event, $index)"></i>
+                    <i class='bx bxs-star' id="{{$index}}-4" (click)="call()" (click)="selectStar($event, $index)"></i>
+                    <i class='bx bxs-star' id="{{$index}}-5" (click)="call()" (click)="selectStar($event, $index)"></i>
                   </div>
                   }
 
