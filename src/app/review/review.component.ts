@@ -1,7 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { ExampleService } from '../@services/example.service';
+import { HttpClientService } from '../@http-services/http-client.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ReviewDialogComponent } from '../dialog/review-dialog/review-dialog.component';
 
 @Component({
   selector: 'app-review',
@@ -11,56 +14,69 @@ import { ExampleService } from '../@services/example.service';
   styleUrl: './review.component.scss'
 })
 export class ReviewComponent {
+  readonly dialog = inject(MatDialog);
 
-  constructor(private exampleService: ExampleService) {}
+  openDialog() {
+    this.dialog.open(ReviewDialogComponent);
+  }
 
-  questObj!: questObj;
+  constructor(
+    private exampleService: ExampleService,
+    private http: HttpClientService
+  ) {};
+
+  questObj!: any;
 
   ngOnInit(): void {
-    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-    //Add 'implements OnInit' to the class.
     this.questObj = this.exampleService.collectionUser;
+    console.log(this.questObj);
+
   }
-  //     = {
-  //     title: "木柵動物園裡，請挑選出你最喜歡動物的前三名，並且說明一下原因",
-  //     userName: "黃曉明",
-  //     userAge: 36,
-  //     userGender: "男",
-  //     questions:[
-  //       {
-  //         questionTitle: "貓科動物",
-  //         response: "老虎"
-  //       },
-  //       {
-  //         questionTitle: "選擇三種你最想成為的動物",
-  //         responseList:[
-  //           "獅子","鯨魚","貓頭鷹"
-  //         ]
-  //       },
-  //       {
-  //         questionTitle: "說明你想成為動物的原因",
-  //         response: "無拘無束、自由自在的生活"
-  //       },
-  //       {
-  //         questionTitle: "您推薦木柵動物園嗎？ 推薦指數：",
-  //         star: 4
-  //       },
-  //     ]
-  //   }
 
+  submit() {
+    let list = [];
+    let obj;
+    for(let i = 0; i < this.questObj.questions.length; i++) {
+      let responseList = [];
+      if(typeof this.questObj.questions[i].response == "string") {
+        responseList.push(this.questObj.questions[i].response)
+        obj = {
+          questId: i + 1,
+          answers: responseList
+        }
+      }else {
+        obj = {
+          questId: i + 1,
+          answers: this.questObj.questions[i].response
+        }
+      }
+      list.push(obj);
+    }
+    let body = {
+      quizId: this.exampleService.quizId,
+      name: this.questObj.userName,
+      email: this.questObj.userEmail,
+      gender: this.questObj.userGender,
+      age: this.questObj.userAge,
+      answerList: list
+    };
+    this.http.postBodyAPI("http://localhost:8080/feedback/fillin", body).subscribe((res: any) => {
+      console.log(res);
+
+    })
+  }
+
+  check(state: string) {
+    this.exampleService.reviewDialogCode = state;
+    if (state == "cansal") {
+      this.openDialog();
+      return;
+    }
+    this.submit();
+    this.openDialog();
+  }
 }
 
-interface questObj {
-  title: string;
-  userName: string;
-  userAge: number;
-  userGender: string;
-  questions: questions[];
-}
 
-interface questions {
-  questionTitle: string;
-  response?: string;
-  responseList?: string[];
-  star?: number;
-}
+
+

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -8,6 +8,10 @@ import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { NzStepsModule } from 'ng-zorro-antd/steps';
 import { ExampleService } from '../@services/example.service';
+import { HttpClientService } from '../@http-services/http-client.service';
+import { HttpParams } from '@angular/common/http';
+import { MatDialog } from '@angular/material/dialog';
+import { QuestionnaireDialogComponent } from '../dialog/questionnaire-dialog/questionnaire-dialog.component';
 
 @Component({
   selector: 'app-questionnaire',
@@ -27,14 +31,27 @@ import { ExampleService } from '../@services/example.service';
   styleUrl: './questionnaire.component.scss'
 })
 export class QuestionnaireComponent {
+  readonly dialog = inject(MatDialog);
+
+  openDialog(state: any) {
+    this.exampleService.questionnaireDialogCode = state;
+    this.dialog.open(QuestionnaireDialogComponent);
+  }
+
+  // 問卷資料
+  quizTitle!: string;
+  startDate!: string;
+  endDate!: string;
+  quizDescription!: string;
 
   current: number = 0;
   showPage: number = 3;
-  starCountSave: number = 0;
+  arrayData: Array<any> = [];
   list: Array<any> = [];
 
   collectionUser = {
     title: "",
+    userEmail: "",
     userName: "",
     userAge: 0,
     userGender: "",
@@ -43,27 +60,96 @@ export class QuestionnaireComponent {
 
   isTrue: boolean = false;
 
+  ngOnInit(): void {
+    let params = new HttpParams().set("id", this.exampleService.quizId);
+    // let params = new HttpParams().set("id", 2);
+    // 拿到 quiz 的內容
+    this.http.postParamsAPI("http://localhost:8080/quiz/get_quiz", params).subscribe((res: any) => {
+
+      this.quizTitle = res.quiz.title;
+      this.startDate = res.quiz.startDate;
+      this.endDate = res.quiz.endDate;
+      this.quizDescription = res.quiz.description;
+    })
+    // 拿到 quiz 所有選項
+    this.http.postParamsAPI("http://localhost:8080/quiz/get_by_quiz_id",  params).subscribe((res: any) => {
+
+      for(let item of res.questionList) {
+        let resObj;
+        if(item.type == "Single" || item.type == "Multi") {
+          resObj = {
+            id: item.questId,
+            title: item.questionTitle,
+            questState: item.type,
+            option: JSON.parse(item.options)
+          }
+        }else {
+          resObj = {
+            id: item.questId,
+            title: item.questionTitle,
+            questState: item.type,
+          }
+        }
+        this.arrayData.push(resObj);
+      }
+
+    })
+
+  }
+
   toggle () {
-    this.keyUesrData();
+    // 使用者沒填基本資料時，卡控
+    if(this.keyUesrData()) {
+      this.openDialog(null);
+      return;
+    }
     this.isTrue = !this.isTrue;
   }
 
-  constructor(private exampleService: ExampleService) {}
+  checkDialog (state: string) {
+    if(state == "cansal") {
+      this.openDialog("cansal");
+    }
+    if(state == "review") {
+      this.openDialog("review");
+    }
+  }
+
+  ngDoCheck(): void {
+    if (this.exampleService.cansal) {
+
+      this.isTrue = !this.isTrue;
+    }
+    this.exampleService.cansal = false;
+  }
+
+
+  constructor(
+    private exampleService: ExampleService,
+    private http: HttpClientService) {}
 
   // 收集受訪者資料
-  keyUesrData() {
+  keyUesrData(): boolean {
     let user = document.querySelectorAll(".user-item input");
     let gender = document.querySelectorAll(".user-item input:checked")
 
+    // 若使用者沒有填值
+    if((user[0] as HTMLInputElement).value == "" ||//
+    (user[1] as HTMLInputElement).value == "" ||//
+    (user[2] as HTMLInputElement).value == "") {
+      return true;
+    }
+    // 使用者沒有選性別
     if(gender.length == 0) {
-      return;
+      return true;
     }
 
-    this.collectionUser.title = "木柵動物園裡，請挑選出你最喜歡動物的前三名，並且說明一下原因";
+    this.collectionUser.title = this.quizTitle;
     this.collectionUser.userName = (user[0] as HTMLInputElement).value;
     this.collectionUser.userAge = Number((user[1] as HTMLInputElement).value);
+    this.collectionUser.userEmail = (user[2] as HTMLInputElement).value;
     this.collectionUser.userGender = (gender[0] as HTMLInputElement).value;
-
+    return false;
   }
   // 收集受訪者回答資料
   keyCollectionUser() {
@@ -73,47 +159,50 @@ export class QuestionnaireComponent {
       let text = document.querySelector(".box" + i + " textarea") as HTMLTextAreaElement;
 
       switch(this.arrayData[i].questState) {
-        case "單選題":
+        case "Single":
           let tempEleR = quiz[quiz.length - 1] as HTMLInputElement;
           let userDataR = {
             questionTitle: this.arrayData[i].title,
+            type:"Single",
             response: tempEleR.value
           }
 
           this.collectionUser.questions.push(userDataR);
 
           break;
-        case "多選題":
+        case "Multi":
           let checklist = [];
           for(let check = 0; check < quiz.length; check++) {
             checklist.push((quiz[check]as HTMLInputElement).value)
           }
           let userDataC = {
             questionTitle: this.arrayData[i].title,
-
-            responseList: checklist
+            type:"Multi",
+            response: checklist
           }
           this.collectionUser.questions.push(userDataC);
 
 
           break;
-        case "文字題":
+        case "Text":
           let userDataT = {
             questionTitle: this.arrayData[i].title,
-
+            type:"Text",
             response: text.value
           }
           this.collectionUser.questions.push(userDataT);
 
           break;
-        case "評量題":
+        case "Star":
+          let star = document.querySelectorAll(".box" + i + " .high-star");
+
           let userDataS = {
             questionTitle: this.arrayData[i].title,
-
-            star: this.starCountSave
+            type:"Star",
+            response: star[star.length - 1].getAttribute("id")?.slice(2)
           }
           this.collectionUser.questions.push(userDataS);
-          this.starCountSave = 0;
+
 
       }
     }
@@ -141,13 +230,11 @@ export class QuestionnaireComponent {
       starAdd.classList.add('high-star');
     }
 
-    this.starCountSave = Number(starCount);
 
   }
 
   pre(): void {
-    this.collectionUser.questions.splice(this.current - 1, 1);
-
+    this.collectionUser.questions.splice(this.current - 1, );
 
     let stepDiv = document.querySelectorAll("nz-step");
     // 進度覽 初始 & 排除最後
@@ -180,7 +267,8 @@ export class QuestionnaireComponent {
         token = 1;
       }
 
-      if(this.starCountSave > 0) {
+      let star = document.querySelectorAll(".box" + i + " .high-star");
+      if(star.length > 0) {
         token = 1;
       }
 
@@ -208,10 +296,14 @@ export class QuestionnaireComponent {
   }
 
   done(): void {
-    this.keyCollectionUser();
 
+    if(this.arrayData.length == this.collectionUser.questions.length) {
+      this.checkDialog("review");
+      return;
+    }
+    this.keyCollectionUser();
     this.exampleService.collectionUser = this.collectionUser;
-    console.log(this.collectionUser);
+    this.checkDialog("review");
 
   }
 
@@ -232,65 +324,51 @@ export class QuestionnaireComponent {
 
 
 
-  arrayData: Array<any> = [
-    {
-      id: 1,
-      title: "貓科動物",
-      questState: "單選題",
-      option: [
-        "獅子",
-        "老虎",
-        "花豹",
-        "摺耳貓"
-      ]
-    },
-    {
-      id: 2,
-      title: "選擇三種你最想成為的動物",
-      questState: "多選題",
-      option: [
-        "獅子",
-        "老虎",
-        "花豹",
-        "大象",
-        "狐狸",
-        "狐蒙",
-        "熊貓",
-        "長頸鹿",
-        "黑猩猩",
-        "貓頭鷹",
-        "老鷹",
-        "海豚",
-        "鯨魚",
-        "鱷魚"
-      ]
-    },
-    {
-      id: 3,
-      title: "說明你想成為動物的原因",
-      questState: "文字題"
-    },
-    {
-      id: 4,
-      title: "您推薦木柵動物園嗎？ 推薦指數：",
-      questState: "評量題",
-    }
-  ];
+  // arrayData: Array<any> = [
+  //   {
+  //     id: 1,
+  //     title: "貓科動物",
+  //     questState: "Single",
+  //     option: [
+  //       "獅子",
+  //       "老虎",
+  //       "花豹",
+  //       "摺耳貓"
+  //     ]
+  //   },
+  //   {
+  //     id: 2,
+  //     title: "選擇三種你最想成為的動物",
+  //     questState: "Multi",
+  //     option: [
+  //       "獅子",
+  //       "老虎",
+  //       "花豹",
+  //       "大象",
+  //       "狐狸",
+  //       "狐蒙",
+  //       "熊貓",
+  //       "長頸鹿",
+  //       "黑猩猩",
+  //       "貓頭鷹",
+  //       "老鷹",
+  //       "海豚",
+  //       "鯨魚",
+  //       "鱷魚"
+  //     ]
+  //   },
+  //   {
+  //     id: 3,
+  //     title: "說明你想成為動物的原因",
+  //     questState: "Text"
+  //   },
+  //   {
+  //     id: 4,
+  //     title: "您推薦木柵動物園嗎？ 推薦指數：",
+  //     questState: "Star",
+  //   }
+  // ];
 
 }
 
 
-interface questObj {
-  title: string;
-  userName: string;
-  userAge: number;
-  userGender: string;
-  questions: questions[];
-}
-
-interface questions {
-  questionTitle: string;
-  response?: string;
-  responseList?: string[];
-  star?: number;
-}

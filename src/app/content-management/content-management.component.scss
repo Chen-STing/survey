@@ -130,9 +130,19 @@
 // 主體內容框
 .mainContent {
   background: var(--background-primary);
+  overflow: hidden;
   grid-area: span 2 / span 3;
 }
 
+// 帳號
+.menuAccount {
+  background: rgb(55, 55, 55);
+  height: 40px;
+  text-align: center;
+  p {
+    width: 5vw;
+  }
 
+}
 
 

@@ -11,7 +11,7 @@
   --background-primary: #252931;
   --tableHeader-color: #0382ad;
   --tableTbody-color: #30557d;
-  --tableOddTbody-color: #2c514d;
+  --tableOddTbody-color: #2c5a50;
   --textTitle-color: rgb(241, 255, 254);
   --text-color: rgb(254, 214, 198);
 }
@@ -37,55 +37,61 @@
 }
 
 // 表單
-.table {
-  width: 100%;
-  border-radius: 10px;
-
-  thead{
-    background: var(--tableHeader-color);
-    th {
-      color: var(--textTitle-color);
-    }
-    th:nth-child(1) {
-      border-radius: 10px 0px 0px 0px;
-    }
-    th:nth-child(4) {
-      border-radius: 0px 10px 0px 0px;
-    }
-  }
-
-}
-
-.table-main tbody{
-  td,
-  th {
-    color: var(--text-color)
-  }
-  tr:nth-child(even) {
+nz-table {
+  tbody {
     background: var(--tableTbody-color);
+  }
+  th {
+    background: var(--tableHeader-color);
+    color: var(--textTitle-color);
+    font-size: 18px;
+  }
+  // id
+  th:nth-child(1) {
+    width: 10%;
+  }
+  // 姓名
+  th:nth-child(2) {
+    width: 30%;
+  }
+  // 填寫時間
+  th:nth-child(3) {
+    width: 45%;
+  }
+  // 結果
+  th:nth-child(4) {
+    width: 15%;
   }
   tr:nth-child(odd) {
     background: var(--tableOddTbody-color);
   }
-
+  td span {
+    width: 50px;
+  }
 }
 
-// 調整標題頭間距
-.table-main thead th:nth-child(1) {
-  width: 10%;
+// 創建視窗
+.create-box {
+  position: absolute;
+  top: 0;
+  right: 40rem;
+  background: rgb(243, 236, 236);
+  width: 30%;
+  border-radius: 20px;
+  z-index: 100;
+  button {
+    background: #5e6ec9;
+    margin: 10px;
+    border-radius: 10px;
+    padding: 5px;
+    color: #eee1ff;
+  }
+  button:hover {
+    opacity: 0.7;
+    color: #010917;
+  }
 }
 
-.table-main thead th:nth-child(2) {
-  width: 35%;
-}
-
-.table-main thead th:nth-child(3) {
-  width: 40%;
-}
-
-.table-main thead th:nth-child(4) {
-  width: 15%;
-}
 
 // 問卷按鈕
 .survey-btn {

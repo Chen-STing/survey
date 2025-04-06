@@ -24,6 +24,7 @@
 // 布局大小
 
 .containerEdit {
+  position: relative;
   width: 95%;
   height: auto;
   border-radius: 15px;
@@ -227,4 +228,22 @@ nz-table {
 .control:nth-child(2) {
   margin-top: 15px;
 }
+
+// dialog顯示
+.dialog {
+  padding: 10px;
+  position: absolute;
+  top: 45%;
+  left: 45%;
+  background: #e6f3f7;
+  width: 300px;
+  min-height: auto;
+  border-radius: 20px;
+}
+
+.dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(2px);
+}
+
 

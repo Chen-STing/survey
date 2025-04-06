@@ -6,15 +6,17 @@ import { ExampleService } from '../@services/example.service';
 
 
 export const routerValidGuard: CanActivateFn = (route, state) => {
-  
-  
-  let valid = inject(ExampleService);
-  console.log(valid);
-  
-  if(valid.user === "aaa" && valid.password === "123") {
 
+
+  let valid = inject(ExampleService);
+  console.log(route);
+  console.log(state);
+
+
+  if(valid.user === "aaa" && valid.password === "123") {
+    valid.token = true;
     return true;
   }
-  
+
   return false;
 }

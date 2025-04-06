@@ -11,7 +11,7 @@
 }
 
 i {
-    font-size: 24px;
+  font-size: 24px;
 }
 
 .search {
@@ -24,6 +24,16 @@ i {
 
 p {
   margin: 0px;
+}
+
+::ng-deep .mat-mdc-menu-content {
+  background: rgb(64, 167, 222);
+  button {
+    color: #e1e1e1;
+  }
+  button:hover {
+    color: #000;
+  }
 }
 
 // 彈出搜尋框
@@ -236,9 +246,20 @@ p {
 // 頁碼導航覽
 
 .pagination {
+  width: 100vw;
   position: absolute;
+  display: flex;
   bottom: 0vh;
-  left: 36%;
+
+  .pagination-list {
+    text-align: center;
+    justify-content: center;
+  }
+}
+
+.limit {
+  cursor: not-allowed;
+  opacity: 0.3;
 }
 
 .pagination-next,.pagination-previous{
@@ -252,4 +273,18 @@ p {
 .pagination-list i {
   line-height: 29px;
   font-size: 25px;
+}
+
+// dialog顯示
+.dialog {
+  background: #a3c1e0;
+  width: 300px;
+  min-height: auto;
+  border-radius: 30px;
+  border: none;
+}
+
+.dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(2px);
 }

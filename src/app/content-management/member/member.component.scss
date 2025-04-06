@@ -6,13 +6,14 @@
 }
 
 .dark {
-  --background-primary: rgb(49, 75, 96);
-  --textTitle-color: rgb(139, 240, 235);
+  --background-primary: #252625;
+  --textTitle-color: #696464;
   --text-color: rgb(158, 182, 182);
   --submit-color:white;
-  --background-border: rgb(43, 44, 44);
+  --background-border: #525259;
 }
 
+// 整體布局
 .containerMember {
   width: 95%;
   height: auto;
@@ -41,14 +42,29 @@
 }
 
 .password-box {
+  position: relative;
   text-align: left;
   margin-bottom: 50px;
+  p {
+    color: var(--text-color);
+  }
+  i {
+    position: absolute;
+    right: 31%;
+    top: 57px;
+    font-size: 23px;
+    color: rgb(160, 188, 254);
+    z-index: 1;
+    cursor: pointer;
+  }
+}
+// icon顯示變化
+.active {
+  color: rgb(13, 40, 117) !important;
 }
 
-.password-box p {
-  color: var(--text-color);
-}
 
+// 底部按鈕
 .card-footer {
   background: rgba(164, 164, 230, 0.7);
 

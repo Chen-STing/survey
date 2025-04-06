@@ -54,11 +54,17 @@
   <nav class="leftSide">
     <div class="memberInfo">
 
-
+      <a nz-dropdown [nzDropdownMenu]="menu">
         <img src="user.png">
-        <span>帳號</span>
-
-
+        <span>{{user}}</span>
+      </a>
+      <nz-dropdown-menu #menu="nzDropdownMenu" nzOverlayClassName="menu">
+        <ul nz-menu nzSelectable>
+          <li nz-menu-item nzDanger Class="menuAccount" routerLink="/" (click)="logOut()">
+            <p>登出</p>
+          </li>
+        </ul>
+      </nz-dropdown-menu>
 
     </div>
     <div class="functionZone">

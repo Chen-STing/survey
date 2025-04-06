@@ -1,87 +1,64 @@
+<body [ngClass]="{dark: !isdarkMode, light: isdarkMode}">
 
-<div class="survey-select">
-  <div class="select is-rounded">
-    <select>
-      <option value="">-請選擇問卷-</option>
-      <option>Rounded dropdown</option>
-      <option>With options</option>
+  <div class="select">
+      <select [(ngModel)]="selectedValue">
+        <option>-請選擇問卷-</option>
+        @for(quiz of arrayQuiz; track $index) {
+          @if(quiz.status == "已結束") {
+            <option>{{quiz.title}}</option>
+          }
+        }
     </select>
   </div>
-</div>
-
-  <div class="containerCount">
 
 
-
-      <div class="title-stat">
-        <h1>問卷名稱</h1>
-        <span class="tag is-warning">收集中</span>
-      </div>
-
-      <nav class="level">
-        <div class="level-item has-text-centered">
-          <div>
-            <p class="heading">Male</p>
-            <p class="title">3,456</p>
-          </div>
-        </div>
-        <div class="level-item has-text-centered">
-          <div>
-            <p class="heading">Female</p>
-            <p class="title">123</p>
-          </div>
-        </div>
-        <div class="level-item has-text-centered">
-          <div>
-            <p class="heading">問卷數</p>
-            <p class="title">456K</p>
-          </div>
-        </div>
-      </nav>
-
-      <div style="
-      width: 90%;
-      border-bottom: 2.5px groove rgba(25, 25, 26, 0.45);
-      margin-bottom: 20px;
-      "></div>
-
-      <div class="count-box">
-
-        <div class="select is-normal">
-          <select>
-            <option>-請選擇題目-</option>
-            <option>Select dropdown</option>
-            <option>With options</option>
-          </select>
-        </div>
-
-        <h2>1. 題目</h2>
-        <table class="table">
-          <thead>
-            <tr>
-              <th>選項</th>
-              <th>頻次比例</th>
-              <th><abbr title="Points">頻次</abbr></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th>1</th>
-              <td>
-                <progress value="10" max="100"></progress>
-                <span>10%</span>
-              </td>
-              <td>23</td>
-            </tr>
-          </tbody>
-        </table>
-
-
-
-
-      </div>
-
-
-
+  <div class="level-item has-text-centered">
+    <div>
+      <p class="heading">總共問卷數
+        <i class='bx bx-notepad'></i>
+      </p>
+      <p class="title">{{total}}
+        <span>份</span>
+      </p>
+    </div>
   </div>
+
+  <div class="age-chart">
+    <canvas id="ageChart"></canvas>
+  </div>
+
+
+  <div class="gender-chart">
+    <canvas id="genderChart"></canvas>
+  </div>
+
+  <div class="optionContent">
+    <div class="select">
+      <select>
+        <option value="">-請選擇題型-</option>
+        <option>Select dropdown</option>
+        <option>With options</option>
+      </select>
+    </div>
+    <div class="columnTitle">
+      <span>題目</span>
+      <span>頻次比例條</span>
+      <span>頻次</span>
+    </div>
+    @for(option of optionList; track $index) {
+      <div class="option-box">
+        <span class="opTitle">{{option.title}}</span>
+        <progress class="progress is-success" value="{{option.amount}}" max="{{total}}"></progress>
+        <span class="subtitle">{{option.amount}}
+          <span>次</span>
+        </span>
+      </div>
+    }
+  </div>
+
+  <div class="option-chart">
+    <canvas id="optionChart"></canvas>
+  </div>
+
+</body>
 

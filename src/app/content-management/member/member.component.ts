@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { ExampleService } from '../../@services/example.service';
 
 @Component({
@@ -18,11 +18,27 @@ export class MemberComponent {
   isdarkMode!: boolean;
 
   ngDoCheck(): void {
-    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-    //Add 'implements OnInit' to the class.
     this.isdarkMode = this.exampleService.isdarkMode;
 
   }
 
+  reset(): void{
+    let inputbox = document.querySelectorAll(".passbox");
+    for(let box of inputbox) {
+      (box as HTMLInputElement).value = "";
+    }
+  }
+  // 顯示 隱藏密碼
+  openText(number: number): void{
+    let inputbox = document.querySelectorAll(".passbox");
+    let icon = document.querySelectorAll(".bxs-low-vision");
+    icon[number].classList.toggle("active");
+    if((inputbox[number] as HTMLInputElement).getAttribute("type") == "text") {
+      (inputbox[number] as HTMLInputElement).setAttribute("type","password");
+    }else {
+      (inputbox[number] as HTMLInputElement).setAttribute("type","text");
+    }
 
+
+  }
 }

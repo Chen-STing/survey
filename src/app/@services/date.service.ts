@@ -26,5 +26,16 @@ export class DateService {
     }
   }
 
+  // 將當前的時間 化為DateTime YYYY-MM-DD HH:MM:SS
+  changeDateTime(dateDate: Date) {
+    let time = new Date();
+    let result = time.toLocaleTimeString().slice(2,);
+    // 當不足8位字元時，前面補一個0
+    if(result.length != 8) {
+      result = 0 + result;
+    }
+    return this.changeDateFormat(dateDate, "-") + " " + result;
+  }
+
   constructor() { }
 }
