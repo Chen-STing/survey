@@ -62,7 +62,6 @@ export class QuestionnaireComponent {
 
   ngOnInit(): void {
     let params = new HttpParams().set("id", this.exampleService.quizId);
-    // let params = new HttpParams().set("id", 2);
     // 拿到 quiz 的內容
     this.http.postParamsAPI("http://localhost:8080/quiz/get_quiz", params).subscribe((res: any) => {
 
@@ -303,6 +302,8 @@ export class QuestionnaireComponent {
     }
     this.keyCollectionUser();
     this.exampleService.collectionUser = this.collectionUser;
+    console.log(this.collectionUser);
+
     this.checkDialog("review");
 
   }

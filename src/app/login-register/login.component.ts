@@ -23,7 +23,13 @@ export class LoginComponent {
   @ViewChild("loginPassword", { static: true })
   private loginPassword!: ElementRef;
 
-
+  ngOnInit(): void {
+    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+    //Add 'implements OnInit' to the class.
+    // setTimeout(() => {
+    //   document.location.reload();
+    // }, 0);
+  }
 
 
   constructor(private ExampleService: ExampleService) {}
@@ -57,6 +63,11 @@ export class LoginComponent {
     document.head.appendChild(this.newStyle);
     Error.style.display = "none";
 
+  }
+
+  reset() {
+    this.newStyle.innerHTML = "";
+    document.head.appendChild(this.newStyle);
   }
 
   // 註冊input事件

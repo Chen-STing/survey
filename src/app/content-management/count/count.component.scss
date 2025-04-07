@@ -11,6 +11,7 @@
   --font-color: #592A25;
   --select-background: #D95560;
   --bar-color: #F2858E;
+  --progress-bar-background-color:rgb(247, 221, 218);
 }
 
 .dark {
@@ -19,6 +20,7 @@
   --font-color: #cecfd6;
   --select-background: #667580;
   --bar-color: #27528a;
+  --progress-bar-background-color:black;
 }
 
 body {
@@ -113,9 +115,11 @@ body {
       margin-bottom: 0px;
       display: inline-block;
       width: 60%;
+      border: none;
     }
     .progress.is-success {
       --bulma-progress-value-background-color: var(--bar-color);
+      --bulma-progress-bar-background-color: var(--progress-bar-background-color)
     }
   }
 }

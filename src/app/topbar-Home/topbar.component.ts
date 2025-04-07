@@ -33,7 +33,7 @@ export class TopbarComponent {
   isShowNav: boolean = false;
   isBoolean: boolean = false;
   inputData: string = '';
-
+  account: string = "";
   // 頁碼數組
   paginationList: Array<any> = [""];
   // 當前頁碼
@@ -98,21 +98,34 @@ export class TopbarComponent {
       this.nowDate = this.dateService.changeDateFormat(new Date(), "-");
       //進行問卷時間判定
       for(let item of this.questionData) {
-        if(item.endTime < this.nowDate) {
+        // 正常問卷
+        if(new Date(item.endTime) > new Date() && new Date(item.startDate) < new Date()) {
+          (document.getElementById("sub-" + item.id) as HTMLButtonElement).disabled = false;
+          (document.getElementById("sub-" + item.id) as HTMLButtonElement).style.cssText = "";
+          (document.querySelector("#label-" + item.id + " h2") as HTMLElement).style.color = "";
+          (document.getElementById("label-" + item.id) as HTMLButtonElement).style.cssText = "background:white";
+          (document.getElementById("endDate-" + item.id) as HTMLElement).innerText = `截止日期： ${item.endTime}`;
+          (document.getElementById("endDate-" + item.id) as HTMLElement).style.cssText = "color:rgb(0, 0, 0);font-size: 14px";
+          continue;
+        }
+        // 過期問卷
+        if(new Date(item.endTime) < new Date()) {
           (document.getElementById("sub-" + item.id) as HTMLButtonElement).disabled = true;
           (document.getElementById("sub-" + item.id) as HTMLButtonElement).style.cssText = "cursor: not-allowed;z-index:100";
           (document.querySelector("#label-" + item.id + " h2") as HTMLElement).style.color = "#a71919";
           (document.getElementById("label-" + item.id) as HTMLButtonElement).style.cssText = "cursor: not-allowed;z-index:100;pointer-events: none;background:#f1a3a3";
           (document.getElementById("endDate-" + item.id) as HTMLElement).innerText = "已截止";
           (document.getElementById("endDate-" + item.id) as HTMLElement).style.cssText = "color: #800E0E;font-size: 2rem";
+          continue;
         }
-        if(item.startDate > this.nowDate) {
+        // 未開始問卷
+        if(new Date(item.startDate) > new Date()) {
           (document.querySelector("#label-" + item.id + " h2") as HTMLElement).style.color = "#12a59e";
           (document.getElementById("label-" + item.id) as HTMLButtonElement).style.cssText = ";z-index:100;background:#a3f0e6";
           (document.getElementById("endDate-" + item.id) as HTMLElement).innerText = "尚未開始";
           (document.getElementById("endDate-" + item.id) as HTMLElement).style.cssText = "color: #0a5e61;font-size: 2rem";
+          continue;
         }
-
       }
     }
 
@@ -126,7 +139,7 @@ export class TopbarComponent {
   }
 
   ngAfterViewChecked(): void {
-
+    this.account = this.exampleService.user;
     this.quizTimeJudge();
   }
 

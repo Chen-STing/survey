@@ -1,7 +1,7 @@
 <body [ngClass]="{dark: !isdarkMode, light: isdarkMode}">
 
   <div class="select">
-      <select [(ngModel)]="selectedValue">
+      <select [(ngModel)]="selectedValue" (change)="selectQuiz()">
         <option>-請選擇問卷-</option>
         @for(quiz of arrayQuiz; track $index) {
           @if(quiz.status == "已結束") {
@@ -34,10 +34,11 @@
 
   <div class="optionContent">
     <div class="select">
-      <select>
-        <option value="">-請選擇題型-</option>
-        <option>Select dropdown</option>
-        <option>With options</option>
+      <select [(ngModel)]="selectedOption" (click)="selectOption()">
+        <option>-請選擇題型-</option>
+        @for(item of statisticsList; track $index) {
+          <option>{{item.questTitle}}</option>
+        }
       </select>
     </div>
     <div class="columnTitle">
@@ -47,9 +48,15 @@
     </div>
     @for(option of optionList; track $index) {
       <div class="option-box">
-        <span class="opTitle">{{option.title}}</span>
-        <progress class="progress is-success" value="{{option.amount}}" max="{{total}}"></progress>
-        <span class="subtitle">{{option.amount}}
+        @if(option.type == "Star") {
+          <span class="opTitle">{{option.option}}
+            <i class='bx bxs-star'></i>
+          </span>
+        }@else {
+          <span class="opTitle">{{option.option}}</span>
+        }
+        <progress id="{{option.option}}" class="progress is-success" value="{{option.count}}" max="{{option.totaloption}}"></progress>
+        <span class="subtitle">{{option.count}}
           <span>次</span>
         </span>
       </div>

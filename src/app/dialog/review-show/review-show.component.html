@@ -12,7 +12,7 @@
       @case ("Multi") {
         <nz-descriptions-item [nzSpan]="3" nzTitle="{{data.questId}}. {{data.questionTitle}}">
         @for (item of data.answers; track $index) {
-          <span class="response">{{item}}</span>
+          <span class="response">{{item}}</span>&nbsp;
         }
         </nz-descriptions-item>
       }

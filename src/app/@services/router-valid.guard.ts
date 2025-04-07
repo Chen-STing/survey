@@ -13,7 +13,7 @@ export const routerValidGuard: CanActivateFn = (route, state) => {
   console.log(state);
 
 
-  if(valid.user === "aaa" && valid.password === "123") {
+  if(valid.user === "admin" && valid.password === "123") {
     valid.token = true;
     return true;
   }
